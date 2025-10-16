@@ -30,24 +30,56 @@ class AuthService with ChangeNotifier {
   Future<void> initialize() async {
     if (_isInitialized) return;
 
-    try {
-      // _db = Db("mongodb://192.168.70.50:27017/solar_audit");
-      // MongoDB Atlas connection - mongo_dart doesn't support mongodb+srv://
-      // Using direct connection to Atlas cluster with resolved SRV records
-      _db = Db(
-        "mongodb://parthpatel685075_db_user:audit@ac-kgznvdl-shard-00-00.vyn7zkv.mongodb.net:27017,ac-kgznvdl-shard-00-01.vyn7zkv.mongodb.net:27017,ac-kgznvdl-shard-00-02.vyn7zkv.mongodb.net:27017/audit?ssl=true&replicaSet=atlas-5bfpso-shard-0&authSource=admin&retryWrites=true&w=majority",
-      );
+    // Maximum number of connection attempts
+    const int maxRetries = 3;
+    int retryCount = 0;
 
-      await _db!.open();
-      _usersCollection = _db!.collection('users');
-      _isInitialized = true;
+    while (retryCount < maxRetries) {
+      try {
+        // Allow connections from any IP address in MongoDB Atlas Network Access settings
+        // For production, use environment variables or secure storage for credentials
+        const String connectionString =
+            "mongodb://parthpatel685075_db_user:audit@ac-kgznvdl-shard-00-00.vyn7zkv.mongodb.net:27017,ac-kgznvdl-shard-00-01.vyn7zkv.mongodb.net:27017,ac-kgznvdl-shard-00-02.vyn7zkv.mongodb.net:27017/audit?ssl=true&replicaSet=atlas-5bfpso-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-      // Create default admin user if not exists
-      await _createDefaultAdmin();
-      print('✅ AuthService initialized successfully');
-    } catch (e) {
-      print('❌ Error initializing AuthService: $e');
-      throw Exception('Failed to initialize AuthService: $e');
+        // Close any existing connection before creating a new one
+        if (_db != null) {
+          await _db!.close();
+        }
+
+        _db = Db(connectionString);
+
+        print(
+          'Connecting to MongoDB for authentication... (Attempt ${retryCount + 1}/$maxRetries)',
+        );
+        await _db!.open();
+        _usersCollection = _db!.collection('users');
+        _isInitialized = true;
+
+        // Create default admin user if not exists
+        await _createDefaultAdmin();
+        print('✅ AuthService initialized successfully');
+        return; // Connection successful, exit the function
+      } catch (e) {
+        retryCount++;
+        print(
+          '❌ Error initializing AuthService (Attempt $retryCount/$maxRetries): $e',
+        );
+        print('Error details: ${e.toString()}');
+
+        if (retryCount >= maxRetries) {
+          print(
+            '⚠️ Maximum connection attempts reached. Please check your network connection and MongoDB Atlas settings.',
+          );
+          throw Exception(
+            'Failed to initialize AuthService after $maxRetries attempts: $e',
+          );
+        } else {
+          // Wait before retrying (exponential backoff)
+          final waitTime = Duration(seconds: retryCount * 2);
+          print('Retrying in ${waitTime.inSeconds} seconds...');
+          await Future.delayed(waitTime);
+        }
+      }
     }
   }
 
@@ -86,12 +118,29 @@ class AuthService with ChangeNotifier {
       });
 
       if (user != null) {
+        // Parse the createdAt string to DateTime
+        DateTime createdAtDate;
+        try {
+          // Try to parse the date string
+          String createdAtStr = user['createdAt'];
+          // Remove "localtime" suffix if present
+          createdAtStr = createdAtStr.replaceAll(' localtime', '');
+          // Parse using the same format used when creating the user
+          createdAtDate = DateFormat('dd/MM/yyyy').parse(createdAtStr);
+        } catch (e) {
+          // If parsing fails, use current date as fallback
+          print(
+            '❌ Error parsing date: ${user['createdAt']}. Using current date instead.',
+          );
+          createdAtDate = DateTime.now();
+        }
+
         _currentUser = User(
           id: user['_id'].toString(),
           username: user['username'],
           fullName: user['fullName'],
           role: user['role'],
-          createdAt: user['createdAt'],
+          createdAt: createdAtDate,
         );
         notifyListeners();
         print('✅ User logged in: ${_currentUser!.username}');
@@ -148,17 +197,32 @@ class AuthService with ChangeNotifier {
 
     try {
       final users = await _usersCollection!.find().toList();
-      return users
-          .map(
-            (user) => User(
-              id: user['_id'].toString(),
-              username: user['username'],
-              fullName: user['fullName'],
-              role: user['role'],
-              createdAt: user['createdAt'],
-            ),
-          )
-          .toList();
+      return users.map((user) {
+        // Parse the createdAt string to DateTime
+        DateTime createdAtDate;
+        try {
+          // Try to parse the date string
+          String createdAtStr = user['createdAt'];
+          // Remove "localtime" suffix if present
+          createdAtStr = createdAtStr.replaceAll(' localtime', '');
+          // Parse using the same format used when creating the user
+          createdAtDate = DateFormat('dd/MM/yyyy').parse(createdAtStr);
+        } catch (e) {
+          // If parsing fails, use current date as fallback
+          print(
+            '❌ Error parsing date: ${user['createdAt']}. Using current date instead.',
+          );
+          createdAtDate = DateTime.now();
+        }
+
+        return User(
+          id: user['_id'].toString(),
+          username: user['username'],
+          fullName: user['fullName'],
+          role: user['role'],
+          createdAt: createdAtDate,
+        );
+      }).toList();
     } catch (e) {
       print('❌ Error fetching users: $e');
       return [];

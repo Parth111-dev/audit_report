@@ -70,7 +70,19 @@ class AuditForm {
   String shift;
   String po;
   String moduleType;
-  String createdAt = DateFormat.HOUR24_MINUTE_SECOND;
+  String createdAt;
+
+  AuditForm({
+    this.id,
+    required this.serialNumber,
+    required this.auditDate,
+    required this.auditorName,
+    required this.verifiedBy,
+    required this.shift,
+    required this.po,
+    required this.moduleType,
+    required this.createdAt,
+  });
 
   // Stage 1: Floor
   String? preLamTempOb1;
@@ -579,513 +591,6 @@ class AuditForm {
   // notes
   String? frontNotesController;
   String? backNotesController;
-
-  AuditForm({
-    this.id,
-    required this.serialNumber,
-    required this.auditDate,
-    required this.auditorName,
-    required this.verifiedBy,
-    required this.shift,
-    required this.po,
-    required this.moduleType,
-    required this.createdAt,
-
-    // Initialize all fields with default values or null
-    this.preLamTempOb1,
-    this.preLamTempOb2,
-    this.preLamTempRemark,
-    this.laminationTempOb1,
-    this.laminationTempOb2,
-    this.laminationTempRemark,
-    this.preLamHumidityOb1,
-    this.preLamHumidityOb2,
-    this.preLamHumidityRemark,
-
-    this.glassMakeOb1,
-    this.glassMakeOb2,
-    this.glassMakeRemark,
-    this.glassPalletNoOb1,
-    this.glassPalletNoOb2,
-    this.glassPalletNoRemark,
-    this.glassSizeOb1,
-    this.glassSizeOb2,
-    this.glassSizeRemark,
-
-    this.evaMakeOb1,
-    this.evaMakeOb2,
-    this.evaMakeRemark,
-    this.evaTypeOb1,
-    this.evaTypeOb2,
-    this.evaTypeRemark,
-    this.evaRollNoOb1,
-    this.evaRollNoOb2,
-    this.evaRollNoRemark,
-    this.evaExpiryDateOb1,
-    this.evaExpiryDateOb2,
-    this.evaExpiryDateRemark,
-    this.evaSizeOb1,
-    this.evaSizeOb2,
-    this.evaSizeRemark,
-
-    this.cellMakeOb1,
-    this.cellMakeOb2,
-    this.cellMakeRemark,
-    this.cellEfficiencyOb1,
-    this.cellEfficiencyOb2,
-    this.cellEfficiencyRemark,
-    this.cellWattageOb1,
-    this.cellWattageOb2,
-    this.cellWattageRemark,
-    this.cellSizeOb1,
-    this.cellSizeOb2,
-    this.cellSizeRemark,
-    this.cellDefectsOb1,
-    this.cellDefectsOb2,
-    this.cellDefectsRemark,
-
-    this.cleanlinessOb1,
-    this.cleanlinessOb2,
-    this.cleanlinessRemark,
-    this.ribbonMakeOb1,
-    this.ribbonMakeOb2,
-    this.ribbonMakeRemark,
-    this.ribbonSizeOb1,
-    this.ribbonSizeOb2,
-    this.ribbonSizeRemark,
-    this.fluxMakeOb1,
-    this.fluxMakeOb2,
-    this.fluxMakeRemark,
-    this.fluxTypeOb1,
-    this.fluxTypeOb2,
-    this.fluxTypeRemark,
-    this.fluxExpiryDateOb1,
-    this.fluxExpiryDateOb2,
-    this.fluxExpiryDateRemark,
-
-    this.solderingTempOb1,
-    this.solderingTempOb2,
-    this.solderingTempRemark,
-    this.workingHeatersOb1,
-    this.workingHeatersOb2,
-    this.workingHeatersRemark,
-    this.solderingPowerOb1,
-    this.solderingPowerOb2,
-    this.solderingPowerRemark,
-    this.solderTimeOb1,
-    this.solderTimeOb2,
-    this.solderTimeRemark,
-
-    this.ribbonAlignmentOb1,
-    this.ribbonAlignmentOb2,
-    this.ribbonAlignmentRemark,
-    this.ribbonDimensionsOb1,
-    this.ribbonDimensionsOb2,
-    this.ribbonDimensionsRemark,
-    this.cellToCellGapOb1,
-    this.cellToCellGapOb2,
-    this.cellToCellGapRemark,
-    this.stringLengthOb1,
-    this.stringLengthOb2,
-    this.stringLengthRemark,
-    this.peelTestResultOb1,
-    this.peelTestResultOb2,
-    this.peelTestResultRemark,
-    this.elInspectionOb1,
-    this.elInspectionOb2,
-    this.elInspectionRemark,
-
-    this.busbarMakeOb1,
-    this.busbarMakeOb2,
-    this.busbarMakeRemark,
-    this.busbarSizeOb1,
-    this.busbarSizeOb2,
-    this.busbarSizeRemark,
-    this.cellToBusbarDistanceOb1,
-    this.cellToBusbarDistanceOb2,
-    this.cellToBusbarDistanceRemark,
-    this.stringToStringGapOb1,
-    this.stringToStringGapOb2,
-    this.stringToStringGapRemark,
-    this.topSideGapOb1,
-    this.topSideGapOb2,
-    this.topSideGapRemark,
-    this.middleSideGapOb1,
-    this.middleSideGapOb2,
-    this.middleSideGapRemark,
-    this.bottomSideGapOb1,
-    this.bottomSideGapOb2,
-    this.bottomSideGapRemark,
-    this.leftSideGapOb1,
-    this.leftSideGapOb2,
-    this.leftSideGapRemark,
-    this.rightSideGapOb1,
-    this.rightSideGapOb2,
-    this.rightSideGapRemark,
-
-    this.tapMakeOb1,
-    this.tapMakeOb2,
-    this.tapMakeRemark,
-    this.tapPositionOb1,
-    this.tapPositionOb2,
-    this.tapPositionRemark,
-    this.tapSizeOb1,
-    this.tapSizeOb2,
-    this.tapSizeRemark,
-
-    this.rearEvaMakeOb1,
-    this.rearEvaMakeOb2,
-    this.rearEvaMakeRemark,
-    this.rearEvaTypeOb1,
-    this.rearEvaTypeOb2,
-    this.rearEvaTypeRemark,
-    this.rearEvaRollNoOb1,
-    this.rearEvaRollNoOb2,
-    this.rearEvaRollNoRemark,
-    this.rearEvaExpiryDateOb1,
-    this.rearEvaExpiryDateOb2,
-    this.rearEvaExpiryDateRemark,
-    this.rearEvaSizeOb1,
-    this.rearEvaSizeOb2,
-    this.rearEvaSizeRemark,
-
-    this.backsheetMakeOb1,
-    this.backsheetMakeOb2,
-    this.backsheetMakeRemark,
-    this.backsheetTypeOb1,
-    this.backsheetTypeOb2,
-    this.backsheetTypeRemark,
-    this.backsheetRollNoOb1,
-    this.backsheetRollNoOb2,
-    this.backsheetRollNoRemark,
-    this.backsheetDimensionsOb1,
-    this.backsheetDimensionsOb2,
-    this.backsheetDimensionsRemark,
-
-    this.logoPositionOkOb1,
-    this.logoPositionOkOb2,
-    this.logoPositionOkRemark,
-    this.barcodePositionOkOb1,
-    this.barcodePositionOkOb2,
-    this.barcodePositionOkRemark,
-
-    this.preElSerialNoOb1,
-    this.preElSerialNoOb2,
-    this.preElSerialNoRemark,
-    this.preElCurrentOb1,
-    this.preElCurrentOb2,
-    this.preElCurrentRemark,
-    this.preElVoltageOb1,
-    this.preElVoltageOb2,
-    this.preElVoltageRemark,
-    this.preElDefectsOb1,
-    this.preElDefectsOb2,
-    this.preElDefectsRemark,
-
-    this.edgeTapingOkOb1,
-    this.edgeTapingOkOb2,
-    this.edgeTapingOkRemark,
-    this.laminatorNoOb1,
-    this.laminatorNoOb2,
-    this.laminatorNoRemark,
-
-    this.laminationTempsCh01Ob1,
-    this.laminationTempsCh01Ob2,
-    this.laminationTempsCh02Ob1,
-    this.laminationTempsCh02Ob2,
-    this.laminationTempsCh03Ob1,
-    this.laminationTempsCh03Ob2,
-    this.laminationTempsRemark,
-    this.vacuumTimesCh01Ob1,
-    this.vacuumTimesCh01Ob2,
-    this.vacuumTimesCh02Ob1,
-    this.vacuumTimesCh02Ob2,
-    this.vacuumTimesCh03Ob1,
-    this.vacuumTimesCh03Ob2,
-    this.vacuumTimesRemark,
-    this.upperventOneCh01Ob1,
-    this.upperventOneCh01Ob2,
-    this.upperventOneCh02Ob1,
-    this.upperventOneCh02Ob2,
-    this.upperventOneCh03Ob1,
-    this.upperventOneCh03Ob2,
-    this.upperventOneRemark,
-    this.laminationOneCh01Ob1,
-    this.laminationOneCh01Ob2,
-    this.laminationOneCh02Ob1,
-    this.laminationOneCh02Ob2,
-    this.laminationOneCh03Ob1,
-    this.laminationOneCh03Ob2,
-    this.laminationOneRemark,
-    this.upperventSecCh01Ob1,
-    this.upperventSecCh01Ob2,
-    this.upperventSecCh02Ob1,
-    this.upperventSecCh02Ob2,
-    this.upperventSecCh03Ob1,
-    this.upperventSecCh03Ob2,
-    this.upperventSecRemark,
-    this.laminationSecCh01Ob1,
-    this.laminationSecCh01Ob2,
-    this.laminationSecCh02Ob1,
-    this.laminationSecCh02Ob2,
-    this.laminationSecCh03Ob1,
-    this.laminationSecCh03Ob2,
-    this.laminationSecRemark,
-    this.upperventThirdCh01Ob1,
-    this.upperventThirdCh01Ob2,
-    this.upperventThirdCh02Ob1,
-    this.upperventThirdCh02Ob2,
-    this.upperventThirdCh03Ob1,
-    this.upperventThirdCh03Ob2,
-    this.upperventThirdRemark,
-    this.laminationThirdCh01Ob1,
-    this.laminationThirdCh01Ob2,
-    this.laminationThirdCh02Ob1,
-    this.laminationThirdCh02Ob2,
-    this.laminationThirdCh03Ob1,
-    this.laminationThirdCh03Ob2,
-    this.laminationThirdRemark,
-    this.lowerVentTimeCh01Ob1,
-    this.lowerVentTimeCh01Ob2,
-    this.lowerVentTimeCh02Ob1,
-    this.lowerVentTimeCh02Ob2,
-    this.lowerVentTimeCh03Ob1,
-    this.lowerVentTimeCh03Ob2,
-    this.lowerVentTimeRemark,
-    this.totalCycleTimeCh01Ob1,
-    this.totalCycleTimeCh01Ob2,
-    this.totalCycleTimeCh02Ob1,
-    this.totalCycleTimeCh02Ob2,
-    this.totalCycleTimeCh03Ob1,
-    this.totalCycleTimeCh03Ob2,
-    this.totalCycleTimeRemark,
-
-    this.trimmingOkOb1,
-    this.trimmingOkOb2,
-    this.trimmingOkRemark,
-
-    this.frameSerialNoOb1,
-    this.frameSerialNoOb2,
-    this.frameSerialNoRemark,
-    this.frameMakeOb1,
-    this.frameMakeOb2,
-    this.frameMakeRemark,
-    this.cornerKeyMakeOb1,
-    this.cornerKeyMakeOb2,
-    this.cornerKeyMakeRemark,
-    this.profileCutAngleOb1,
-    this.profileCutAngleOb2,
-    this.profileCutAngleRemark,
-    this.frameLengthOb1,
-    this.frameLengthOb2,
-    this.frameLengthRemark,
-    this.frameWidthOb1,
-    this.frameWidthOb2,
-    this.frameWidthRemark,
-    this.frameHeightOb1,
-    this.frameHeightOb2,
-    this.frameHeightRemark,
-
-    this.mountingHoleOb1,
-    this.mountingHoleOb2,
-    this.mountingHoleRemark,
-    this.xPitchOb1,
-    this.xPitchOb2,
-    this.xPitchRemark,
-    this.yPitchOb1,
-    this.yPitchOb2,
-    this.yPitchRemark,
-    this.groundHoleDiaOb1,
-    this.groundHoleDiaOb2,
-    this.groundHoleDiaRemark,
-    this.groundHoleDistanceOb1,
-    this.groundHoleDistanceOb2,
-    this.groundHoleDistanceRemark,
-    this.drainHoleSizeOb1,
-    this.drainHoleSizeOb2,
-    this.drainHoleSizeRemark,
-    this.drainHoleDistanceOb1,
-    this.drainHoleDistanceOb2,
-    this.drainHoleDistanceRemark,
-    this.diagonalLengthOb1,
-    this.diagonalLengthOb2,
-    this.diagonalLengthRemark,
-
-    this.sealantMakeOb1,
-    this.sealantMakeOb2,
-    this.sealantMakeRemark,
-    this.sealantTypeOb1,
-    this.sealantTypeOb2,
-    this.sealantTypeRemark,
-    this.sealantWeightOb1,
-    this.sealantWeightOb2,
-    this.sealantWeightRemark,
-    this.scratchDentsOb1,
-    this.scratchDentsOb2,
-    this.scratchDentsRemark,
-    this.frameDefectsOb1,
-    this.frameDefectsOb2,
-    this.frameDefectsRemark,
-
-    this.jbSerialNoOb1,
-    this.jbSerialNoOb2,
-    this.jbSerialNoRemark,
-    this.jbMakeOb1,
-    this.jbMakeOb2,
-    this.jbMakeRemark,
-    this.jbTypeOb1,
-    this.jbTypeOb2,
-    this.jbTypeRemark,
-    this.diodeModelOb1,
-    this.diodeModelOb2,
-    this.diodeModelRemark,
-    this.jbPlacementOb1,
-    this.jbPlacementOb2,
-    this.jbPlacementRemark,
-
-    this.jbSealantWeightsAOb1,
-    this.jbSealantWeightsAOb2,
-    this.jbSealantWeightsBOb1,
-    this.jbSealantWeightsBOb2,
-    this.jbSealantWeightsCOb1,
-    this.jbSealantWeightsCOb2,
-    this.jbSealantWeightsRemark,
-
-    this.solderingQualityOb1,
-    this.solderingQualityOb2,
-    this.solderingQualityRemark,
-    this.pottingSealantMakeOb1,
-    this.pottingSealantMakeOb2,
-    this.pottingSealantMakeRemark,
-    this.pottingSealantTypeOb1,
-    this.pottingSealantTypeOb2,
-    this.pottingSealantTypeRemark,
-    this.pottingSealantExpiryOb1,
-    this.pottingSealantExpiryOb2,
-    this.pottingSealantExpiryRemark,
-
-    this.curingTimeOb1,
-    this.curingTimeOb2,
-    this.curingTimeRemark,
-
-    this.pottingSealantWeightsAOb1,
-    this.pottingSealantWeightsAOb2,
-    this.pottingSealantWeightsBOb1,
-    this.pottingSealantWeightsBOb2,
-    this.pottingSealantWeightsCOb1,
-    this.pottingSealantWeightsCOb2,
-    this.pottingSealantWeightsRemark,
-    this.pottingRatioAOb1,
-    this.pottingRatioBOb1,
-    this.pottingRatioOb1,
-    this.pottingRatioAOb2,
-    this.pottingRatioBOb2,
-    this.pottingRatioOb2,
-    this.pottingRatioRemark,
-
-    this.cableLengthOb1,
-    this.cableLengthOb2,
-    this.cableLengthRemark,
-    this.visualStatusOb1,
-    this.visualStatusOb2,
-    this.visualStatusRemark,
-
-    this.curingTimeLineOb1,
-    this.curingTimeLineOb2,
-    this.curingTimeLineRemark,
-    this.curingTempOb1,
-    this.curingTempOb2,
-    this.curingTempRemark,
-    this.curingHumidityOb1,
-    this.curingHumidityOb2,
-    this.curingHumidityRemark,
-
-    this.cleaningOkOb1,
-    this.cleaningOkOb2,
-    this.cleaningOkRemark,
-
-    this.hipotSerialNoOb1,
-    this.hipotSerialNoOb2,
-    this.hipotSerialNoRemark,
-    this.dcwOb1,
-    this.dcwOb2,
-    this.dcwRemark,
-    this.irOb1,
-    this.irOb2,
-    this.irRemark,
-    this.groundContinuityOb1,
-    this.groundContinuityOb2,
-    this.groundContinuityRemark,
-
-    this.postElSerialNoOb1,
-    this.postElSerialNoOb2,
-    this.postElSerialNoRemark,
-    this.postElCurrentOb1,
-    this.postElCurrentOb2,
-    this.postElCurrentRemark,
-    this.postElVoltageOb1,
-    this.postElVoltageOb2,
-    this.postElVoltageRemark,
-    this.postElDefectsOb1,
-    this.postElDefectsOb2,
-    this.postElDefectsRemark,
-
-    this.calibrationDateOb1,
-    this.calibrationDateOb2,
-    this.calibrationDateRemark,
-    this.sunSerialNoOb1,
-    this.sunSerialNoOb2,
-    this.sunSerialNoRemark,
-    this.modulePowerOb1,
-    this.modulePowerOb2,
-    this.modulePowerRemark,
-    this.iscOb1,
-    this.iscOb2,
-    this.iscRemark,
-    this.vocOb1,
-    this.vocOb2,
-    this.vocRemark,
-    this.impOb1,
-    this.impOb2,
-    this.impRemark,
-    this.vmpOb1,
-    this.vmpOb2,
-    this.vmpRemark,
-    this.moduleTempOb1,
-    this.moduleTempOb2,
-    this.moduleTempRemark,
-    this.fillFactorOb1,
-    this.fillFactorOb2,
-    this.fillFactorRemark,
-    this.efficiencyOb1,
-    this.efficiencyOb2,
-    this.efficiencyRemark,
-    this.ivCurveOkOb1,
-    this.ivCurveOkOb2,
-    this.ivCurveOkRemark,
-
-    this.visualInspectionOb1,
-    this.visualInspectionOb2,
-    this.visualInspectionRemark,
-    this.jbCoverFitmentOb1,
-    this.jbCoverFitmentOb2,
-    this.jbCoverFitmentRemark,
-    this.labelPlacementOb1,
-    this.labelPlacementOb2,
-    this.labelPlacementRemark,
-    this.fqcDefectsOb1,
-    this.fqcDefectsOb2,
-    this.fqcDefectsRemark,
-    this.sortingStatusOb1,
-    this.sortingStatusOb2,
-    this.sortingStatusRemark,
-    this.palletConditionOb1,
-    this.palletConditionOb2,
-    this.palletConditionRemark,
-
-    this.frontNotesController,
-    this.backNotesController,
-  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -1750,7 +1255,8 @@ class AuditForm {
   }
 
   factory AuditForm.fromJson(Map<String, dynamic> json) {
-    return AuditForm(
+    // First create the AuditForm with required fields
+    final form = AuditForm(
       id: parseMongoId(json['_id']),
       serialNumber: json['serialNumber'] ?? '',
       auditDate: parseAuditDate(json['auditDate']),
@@ -1760,659 +1266,662 @@ class AuditForm {
       po: json['po'] ?? '',
       moduleType: json['moduleType'] ?? '',
       createdAt: json['createdAt'] ?? '',
-
-      // Stage 1: Floor
-      preLamTempOb1: json['preLamTempOb1'],
-      preLamTempOb2: json['preLamTempOb2'],
-      preLamTempRemark: json['preLamTempRemark'],
-
-      laminationTempOb1: json['laminationTempOb1'],
-      laminationTempOb2: json['laminationTempOb2'],
-      laminationTempRemark: json['laminationTempRemark'],
-
-      preLamHumidityOb1: json['preLamHumidityOb1'],
-      preLamHumidityOb2: json['preLamHumidityOb2'],
-      preLamHumidityRemark: json['preLamHumidityRemark'],
-
-      // Stage 2: Front Glass Loading
-      glassMakeOb1: json['glassMakeOb1'],
-      glassMakeOb2: json['glassMakeOb2'],
-      glassMakeRemark: json['glassMakeRemark'],
-
-      glassPalletNoOb1: json['glassPalletNoOb1'],
-      glassPalletNoOb2: json['glassPalletNoOb2'],
-      glassPalletNoRemark: json['glassPalletNoRemark'],
-
-      glassSizeOb1: json['glassSizeOb1'],
-      glassSizeOb2: json['glassSizeOb2'],
-      glassSizeRemark: json['glassSizeRemark'],
-
-      // Stage 3: Front side EVA Cutting
-      evaMakeOb1: json['evaMakeOb1'],
-      evaMakeOb2: json['evaMakeOb2'],
-      evaMakeRemark: json['evaMakeRemark'],
-
-      evaTypeOb1: json['evaTypeOb1'],
-      evaTypeOb2: json['evaTypeOb2'],
-      evaTypeRemark: json['evaTypeRemark'],
-
-      evaRollNoOb1: json['evaRollNoOb1'],
-      evaRollNoOb2: json['evaRollNoOb2'],
-      evaRollNoRemark: json['evaRollNoRemark'],
-
-      evaExpiryDateOb1: json['evaExpiryDateOb1'],
-      evaExpiryDateOb2: json['evaExpiryDateOb2'],
-      evaExpiryDateRemark: json['evaExpiryDateRemark'],
-
-      evaSizeOb1: json['evaSizeOb1'],
-      evaSizeOb2: json['evaSizeOb2'],
-      evaSizeRemark: json['evaSizeRemark'],
-
-      // Stage 4: Stringer
-      cellMakeOb1: json['cellMakeOb1'],
-      cellMakeOb2: json['cellMakeOb2'],
-      cellMakeRemark: json['cellMakeRemark'],
-
-      cellEfficiencyOb1: json['cellEfficiencyOb1'],
-      cellEfficiencyOb2: json['cellEfficiencyOb2'],
-      cellEfficiencyRemark: json['cellEfficiencyRemark'],
-
-      cellWattageOb1: json['cellWattageOb1'],
-      cellWattageOb2: json['cellWattageOb2'],
-      cellWattageRemark: json['cellWattageRemark'],
-
-      cellSizeOb1: json['cellSizeOb1'],
-      cellSizeOb2: json['cellSizeOb2'],
-      cellSizeRemark: json['cellSizeRemark'],
-
-      cellDefectsOb1: json['cellDefectsOb1'],
-      cellDefectsOb2: json['cellDefectsOb2'],
-      cellDefectsRemark: json['cellDefectsRemark'],
-
-      cleanlinessOb1: json['cleanlinessOb1'],
-      cleanlinessOb2: json['cleanlinessOb2'],
-      cleanlinessRemark: json['cleanlinessRemark'],
-
-      ribbonMakeOb1: json['ribbonMakeOb1'],
-      ribbonMakeOb2: json['ribbonMakeOb2'],
-      ribbonMakeRemark: json['ribbonMakeRemark'],
-
-      ribbonSizeOb1: json['ribbonSizeOb1'],
-      ribbonSizeOb2: json['ribbonSizeOb2'],
-      ribbonSizeRemark: json['ribbonSizeRemark'],
-
-      fluxMakeOb1: json['fluxMakeOb1'],
-      fluxMakeOb2: json['fluxMakeOb2'],
-      fluxMakeRemark: json['fluxMakeRemark'],
-
-      fluxTypeOb1: json['fluxTypeOb1'],
-      fluxTypeOb2: json['fluxTypeOb2'],
-      fluxTypeRemark: json['fluxTypeRemark'],
-
-      fluxExpiryDateOb1: json['fluxExpiryDateOb1'],
-      fluxExpiryDateOb2: json['fluxExpiryDateOb2'],
-      fluxExpiryDateRemark: json['fluxExpiryDateRemark'],
-
-      solderingTempOb1: json['solderingTempOb1'],
-      solderingTempOb2: json['solderingTempOb2'],
-      solderingTempRemark: json['solderingTempRemark'],
-
-      workingHeatersOb1: json['workingHeatersOb1'],
-      workingHeatersOb2: json['workingHeatersOb2'],
-      workingHeatersRemark: json['workingHeatersRemark'],
-
-      solderingPowerOb1: json['solderingPowerOb1'],
-      solderingPowerOb2: json['solderingPowerOb2'],
-      solderingPowerRemark: json['solderingPowerRemark'],
-
-      solderTimeOb1: json['solderTimeOb1'],
-      solderTimeOb2: json['solderTimeOb2'],
-      solderTimeRemark: json['solderTimeRemark'],
-
-      ribbonAlignmentOb1: json['ribbonAlignmentOb1'],
-      ribbonAlignmentOb2: json['ribbonAlignmentOb2'],
-      ribbonAlignmentRemark: json['ribbonAlignmentRemark'],
-
-      ribbonDimensionsOb1: json['ribbonDimensionsOb1'],
-      ribbonDimensionsOb2: json['ribbonDimensionsOb2'],
-      ribbonDimensionsRemark: json['ribbonDimensionsRemark'],
-
-      cellToCellGapOb1: json['cellToCellGapOb1'],
-      cellToCellGapOb2: json['cellToCellGapOb2'],
-      cellToCellGapRemark: json['cellToCellGapRemark'],
-
-      stringLengthOb1: json['stringLengthOb1'],
-      stringLengthOb2: json['stringLengthOb2'],
-      stringLengthRemark: json['stringLengthRemark'],
-
-      peelTestResultOb1: json['peelTestResultOb1'],
-      peelTestResultOb2: json['peelTestResultOb2'],
-      peelTestResultRemark: json['peelTestResultRemark'],
-
-      elInspectionOb1: json['elInspectionOb1'],
-      elInspectionOb2: json['elInspectionOb2'],
-      elInspectionRemark: json['elInspectionRemark'],
-
-      // Stage 5: Lay-up & Auto Bussing
-      busbarMakeOb1: json['busbarMakeOb1'],
-      busbarMakeOb2: json['busbarMakeOb2'],
-      busbarMakeRemark: json['busbarMakeRemark'],
-
-      busbarSizeOb1: json['busbarSizeOb1'],
-      busbarSizeOb2: json['busbarSizeOb2'],
-      busbarSizeRemark: json['busbarSizeRemark'],
-
-      cellToBusbarDistanceOb1: json['cellToBusbarDistanceOb1'],
-      cellToBusbarDistanceOb2: json['cellToBusbarDistanceOb2'],
-      cellToBusbarDistanceRemark: json['cellToBusbarDistanceRemark'],
-
-      stringToStringGapOb1: json['stringToStringGapOb1'],
-      stringToStringGapOb2: json['stringToStringGapOb2'],
-      stringToStringGapRemark: json['stringToStringGapRemark'],
-
-      topSideGapOb1: json['topSideGapOb1'],
-      topSideGapOb2: json['topSideGapOb2'],
-      topSideGapRemark: json['topSideGapRemark'],
-
-      middleSideGapOb1: json['middleSideGapOb1'],
-      middleSideGapOb2: json['middleSideGapOb2'],
-      middleSideGapRemark: json['middleSideGapRemark'],
-
-      bottomSideGapOb1: json['bottomSideGapOb1'],
-      bottomSideGapOb2: json['bottomSideGapOb2'],
-      bottomSideGapRemark: json['bottomSideGapRemark'],
-
-      leftSideGapOb1: json['leftSideGapOb1'],
-      leftSideGapOb2: json['leftSideGapOb2'],
-      leftSideGapRemark: json['leftSideGapRemark'],
-
-      rightSideGapOb1: json['rightSideGapOb1'],
-      rightSideGapOb2: json['rightSideGapOb2'],
-      rightSideGapRemark: json['rightSideGapRemark'],
-
-      // Stage 6: Auto Tapping
-      tapMakeOb1: json['tapMakeOb1'],
-      tapMakeOb2: json['tapMakeOb2'],
-      tapMakeRemark: json['tapMakeRemark'],
-
-      tapPositionOb1: json['tapPositionOb1'],
-      tapPositionOb2: json['tapPositionOb2'],
-      tapPositionRemark: json['tapPositionRemark'],
-
-      tapSizeOb1: json['tapSizeOb1'],
-      tapSizeOb2: json['tapSizeOb2'],
-      tapSizeRemark: json['tapSizeRemark'],
-
-      // Stage 7: Rear side EVA Cutting
-      rearEvaMakeOb1: json['rearEvaMakeOb1'],
-      rearEvaMakeOb2: json['rearEvaMakeOb2'],
-      rearEvaMakeRemark: json['rearEvaMakeRemark'],
-
-      rearEvaTypeOb1: json['rearEvaTypeOb1'],
-      rearEvaTypeOb2: json['rearEvaTypeOb2'],
-      rearEvaTypeRemark: json['rearEvaTypeRemark'],
-
-      rearEvaRollNoOb1: json['rearEvaRollNoOb1'],
-      rearEvaRollNoOb2: json['rearEvaRollNoOb2'],
-      rearEvaRollNoRemark: json['rearEvaRollNoRemark'],
-
-      rearEvaExpiryDateOb1: json['rearEvaExpiryDateOb1'],
-      rearEvaExpiryDateOb2: json['rearEvaExpiryDateOb2'],
-      rearEvaExpiryDateRemark: json['rearEvaExpiryDateRemark'],
-
-      rearEvaSizeOb1: json['rearEvaSizeOb1'],
-      rearEvaSizeOb2: json['rearEvaSizeOb2'],
-      rearEvaSizeRemark: json['rearEvaSizeRemark'],
-
-      // Stage 8: Rear Side Back Sheet/Glass
-      backsheetMakeOb1: json['backsheetMakeOb1'],
-      backsheetMakeOb2: json['backsheetMakeOb2'],
-      backsheetMakeRemark: json['backsheetMakeRemark'],
-
-      backsheetTypeOb1: json['backsheetTypeOb1'],
-      backsheetTypeOb2: json['backsheetTypeOb2'],
-      backsheetTypeRemark: json['backsheetTypeRemark'],
-
-      backsheetRollNoOb1: json['backsheetRollNoOb1'],
-      backsheetRollNoOb2: json['backsheetRollNoOb2'],
-      backsheetRollNoRemark: json['backsheetRollNoRemark'],
-
-      backsheetDimensionsOb1: json['backsheetDimensionsOb1'],
-      backsheetDimensionsOb2: json['backsheetDimensionsOb2'],
-      backsheetDimensionsRemark: json['backsheetDimensionsRemark'],
-
-      // Stage 9: Logo & Barcode Fixing
-      logoPositionOkOb1: json['logoPositionOkOb1'],
-      logoPositionOkOb2: json['logoPositionOkOb2'],
-      logoPositionOkRemark: json['logoPositionOkRemark'],
-
-      barcodePositionOkOb1: json['barcodePositionOkOb1'],
-      barcodePositionOkOb2: json['barcodePositionOkOb2'],
-      barcodePositionOkRemark: json['barcodePositionOkRemark'],
-
-      // Continue for remaining stages...
-      // Stage 10: Pre-El Inspection
-      preElSerialNoOb1: json['preElSerialNoOb1'],
-      preElSerialNoOb2: json['preElSerialNoOb2'],
-      preElSerialNoRemark: json['preElSerialNoRemark'],
-
-      preElCurrentOb1: json['preElCurrentOb1'],
-      preElCurrentOb2: json['preElCurrentOb2'],
-      preElCurrentRemark: json['preElCurrentRemark'],
-
-      preElVoltageOb1: json['preElVoltageOb1'],
-      preElVoltageOb2: json['preElVoltageOb2'],
-      preElVoltageRemark: json['preElVoltageRemark'],
-
-      preElDefectsOb1: json['preElDefectsOb1'],
-      preElDefectsOb2: json['preElDefectsOb2'],
-      preElDefectsRemark: json['preElDefectsRemark'],
-
-      // Stage 11: Auto Edge Taping
-      edgeTapingOkOb1: json['edgeTapingOkOb1'],
-      edgeTapingOkOb2: json['edgeTapingOkOb2'],
-      edgeTapingOkRemark: json['edgeTapingOkRemark'],
-
-      // Stage 12: Lamination Process
-      laminatorNoOb1: json['laminatorNoOb1'],
-      laminatorNoOb2: json['laminatorNoOb2'],
-      laminatorNoRemark: json['laminatorNoRemark'],
-
-      // For lamination temps (converting from individual fields)
-      laminationTempsCh01Ob1: json['laminationTempsCh01Ob1'],
-      laminationTempsCh01Ob2: json['laminationTempsCh01Ob2'],
-
-      laminationTempsCh02Ob1: json['laminationTempsCh02Ob1'],
-      laminationTempsCh02Ob2: json['laminationTempsCh02Ob2'],
-
-      laminationTempsCh03Ob1: json['laminationTempsCh03Ob1'],
-      laminationTempsCh03Ob2: json['laminationTempsCh03Ob2'],
-      laminationTempsRemark: json['laminationTempsRemark'],
-
-      vacuumTimesCh01Ob1: json['vacuumTimesCh01Ob1'],
-      vacuumTimesCh01Ob2: json['vacuumTimesCh01Ob2'],
-
-      vacuumTimesCh02Ob1: json['vacuumTimesCh02Ob1'],
-      vacuumTimesCh02Ob2: json['vacuumTimesCh02Ob2'],
-
-      vacuumTimesCh03Ob1: json['vacuumTimesCh03Ob1'],
-      vacuumTimesCh03Ob2: json['vacuumTimesCh03Ob2'],
-      vacuumTimesRemark: json['vacuumTimesRemark'],
-
-      // upper Vent 1
-      upperventOneCh01Ob1: json['upperventOneCh01Ob1'],
-      upperventOneCh01Ob2: json['upperventOneCh01Ob2'],
-
-      upperventOneCh02Ob1: json['upperventOneCh02Ob1'],
-      upperventOneCh02Ob2: json['upperventOneCh02Ob2'],
-
-      upperventOneCh03Ob1: json['upperventOneCh03Ob1'],
-      upperventOneCh03Ob2: json['upperventOneCh03Ob2'],
-      upperventOneRemark: json['upperventOneRemark'],
-
-      // lamination 1
-      laminationOneCh01Ob1: json['laminationOneCh01Ob1'],
-      laminationOneCh01Ob2: json['laminationOneCh01Ob2'],
-
-      laminationOneCh02Ob1: json['laminationOneCh02Ob1'],
-      laminationOneCh02Ob2: json['laminationOneCh02Ob2'],
-
-      laminationOneCh03Ob1: json['laminationOneCh03Ob1'],
-      laminationOneCh03Ob2: json['laminationOneCh03Ob2'],
-      laminationOneRemark: json['laminationOneRemark'],
-
-      // upper Vent 2
-      upperventSecCh01Ob1: json['upperventSecCh01Ob1'],
-      upperventSecCh01Ob2: json['upperventSecCh01Ob2'],
-
-      upperventSecCh02Ob1: json['upperventSecCh02Ob1'],
-      upperventSecCh02Ob2: json['upperventSecCh02Ob2'],
-
-      upperventSecCh03Ob1: json['upperventSecCh03Ob1'],
-      upperventSecCh03Ob2: json['upperventSecCh03Ob2'],
-      upperventSecRemark: json['upperventSecRemark'],
-
-      // lamination 2
-      laminationSecCh01Ob1: json['laminationSecCh01Ob1'],
-      laminationSecCh01Ob2: json['laminationSecCh01Ob2'],
-
-      laminationSecCh02Ob1: json['laminationSecCh02Ob1'],
-      laminationSecCh02Ob2: json['laminationSecCh02Ob2'],
-
-      laminationSecCh03Ob1: json['laminationSecCh03Ob1'],
-      laminationSecCh03Ob2: json['laminationSecCh03Ob2'],
-      laminationSecRemark: json['laminationSecRemark'],
-
-      // upper Vent 3
-      upperventThirdCh01Ob1: json['upperventThirdCh01Ob1'],
-      upperventThirdCh01Ob2: json['upperventThirdCh01Ob2'],
-
-      upperventThirdCh02Ob1: json['upperventThirdCh02Ob1'],
-      upperventThirdCh02Ob2: json['upperventThirdCh02Ob2'],
-
-      upperventThirdCh03Ob1: json['upperventThirdCh03Ob1'],
-      upperventThirdCh03Ob2: json['upperventThirdCh03Ob2'],
-      upperventThirdRemark: json['upperventThirdRemark'],
-
-      // lamination 3
-      laminationThirdCh01Ob1: json['laminationThirdCh01Ob1'],
-      laminationThirdCh01Ob2: json['laminationThirdCh01Ob2'],
-
-      laminationThirdCh02Ob1: json['laminationThirdCh02Ob1'],
-      laminationThirdCh02Ob2: json['laminationThirdCh02Ob2'],
-
-      laminationThirdCh03Ob1: json['laminationThirdCh03Ob1'],
-      laminationThirdCh03Ob2: json['laminationThirdCh03Ob2'],
-      laminationThirdRemark: json['laminationThirdRemark'],
-
-      // lowe vent time
-      lowerVentTimeCh01Ob1: json['lowerVentTimeCh01Ob1'],
-      lowerVentTimeCh01Ob2: json['lowerVentTimeCh01Ob2'],
-
-      lowerVentTimeCh02Ob1: json['lowerVentTimeCh02Ob1'],
-      lowerVentTimeCh02Ob2: json['lowerVentTimeCh02Ob2'],
-
-      lowerVentTimeCh03Ob1: json['lowerVentTimeCh03Ob1'],
-      lowerVentTimeCh03Ob2: json['lowerVentTimeCh03Ob2'],
-      lowerVentTimeRemark: json['lowerVentTimeRemark'],
-
-      // Total cycle time
-      totalCycleTimeCh01Ob1: json['totalCycleTimeCh01Ob1'],
-      totalCycleTimeCh01Ob2: json['totalCycleTimeCh01Ob2'],
-
-      totalCycleTimeCh02Ob1: json['totalCycleTimeCh02Ob1'],
-      totalCycleTimeCh02Ob2: json['totalCycleTimeCh02Ob2'],
-
-      totalCycleTimeCh03Ob1: json['totalCycleTimeCh03Ob1'],
-      totalCycleTimeCh03Ob2: json['totalCycleTimeCh03Ob2'],
-      totalCycleTimeRemark: json['totalCycleTimeRemark'],
-
-      // Stage 13: Auto Edge Trimming
-      trimmingOkOb1: json['trimmingOkOb1'],
-      trimmingOkOb2: json['trimmingOkOb2'],
-      trimmingOkRemark: json['trimmingOkRemark'],
-
-      // Stage 14: Framing Process
-      frameSerialNoOb1: json['frameSerialNoOb1'],
-      frameSerialNoOb2: json['frameSerialNoOb2'],
-      frameSerialNoRemark: json['frameSerialNoRemark'],
-
-      frameMakeOb1: json['frameMakeOb1'],
-      frameMakeOb2: json['frameMakeOb2'],
-      frameMakeRemark: json['frameMakeRemark'],
-
-      cornerKeyMakeOb1: json['cornerKeyMakeOb1'],
-      cornerKeyMakeOb2: json['cornerKeyMakeOb2'],
-      cornerKeyMakeRemark: json['cornerKeyMakeRemark'],
-
-      profileCutAngleOb1: json['profileCutAngleOb1'],
-      profileCutAngleOb2: json['profileCutAngleOb2'],
-      profileCutAngleRemark: json['profileCutAngleRemark'],
-
-      frameLengthOb1: json['frameLengthOb1'],
-      frameLengthOb2: json['frameLengthOb2'],
-      frameLengthRemark: json['frameLengthRemark'],
-
-      frameWidthOb1: json['frameWidthOb1'],
-      frameWidthOb2: json['frameWidthOb2'],
-      frameWidthRemark: json['frameWidthRemark'],
-
-      frameHeightOb1: json['frameHeightOb1'],
-      frameHeightOb2: json['frameHeightOb2'],
-      frameHeightRemark: json['frameHeightRemark'],
-
-      mountingHoleOb1: json['mountingHoleOb1'],
-      mountingHoleOb2: json['mountingHoleOb2'],
-      mountingHoleRemark: json['mountingHoleRemark'],
-
-      xPitchOb1: json['xPitchOb1'],
-      xPitchOb2: json['xPitchOb2'],
-      xPitchRemark: json['xPitchRemark'],
-
-      yPitchOb1: json['yPitchOb1'],
-      yPitchOb2: json['yPitchOb2'],
-      yPitchRemark: json['yPitchRemark'],
-
-      groundHoleDiaOb1: json['groundHoleDiaOb1'],
-      groundHoleDiaOb2: json['groundHoleDiaOb2'],
-      groundHoleDiaRemark: json['groundHoleDiaRemark'],
-
-      groundHoleDistanceOb1: json['groundHoleDistanceOb1'],
-      groundHoleDistanceOb2: json['groundHoleDistanceOb2'],
-      groundHoleDistanceRemark: json['groundHoleDistanceRemark'],
-
-      drainHoleSizeOb1: json['drainHoleSizeOb1'],
-      drainHoleSizeOb2: json['drainHoleSizeOb2'],
-      drainHoleSizeRemark: json['drainHoleSizeRemark'],
-
-      drainHoleDistanceOb1: json['drainHoleDistanceOb1'],
-      drainHoleDistanceOb2: json['drainHoleDistanceOb2'],
-      drainHoleDistanceRemark: json['drainHoleDistanceRemark'],
-
-      diagonalLengthOb1: json['diagonalLengthOb1'],
-      diagonalLengthOb2: json['diagonalLengthOb2'],
-      diagonalLengthRemark: json['diagonalLengthRemark'],
-
-      sealantMakeOb1: json['sealantMakeOb1'],
-      sealantMakeOb2: json['sealantMakeOb2'],
-      sealantMakeRemark: json['sealantMakeRemark'],
-
-      scratchDentsOb1: json['scratchDentsOb1'],
-      scratchDentsOb2: json['scratchDentsOb2'],
-      scratchDentsRemark: json['scratchDentsRemark'],
-
-      sealantTypeOb1: json['sealantTypeOb1'],
-      sealantTypeOb2: json['sealantTypeOb2'],
-      sealantTypeRemark: json['sealantTypeRemark'],
-
-      sealantWeightOb1: json['sealantWeightOb1'],
-      sealantWeightOb2: json['sealantWeightOb2'],
-      sealantWeightRemark: json['sealantWeightRemark'],
-
-      frameDefectsOb1: json['frameDefectsOb1'],
-      frameDefectsOb2: json['frameDefectsOb2'],
-      frameDefectsRemark: json['frameDefectsRemark'],
-
-      // Stage 15: Junction Box Assembly
-      jbSerialNoOb1: json['jbSerialNoOb1'],
-      jbSerialNoOb2: json['jbSerialNoOb2'],
-      jbSerialNoRemark: json['jbSerialNoRemark'],
-
-      jbMakeOb1: json['jbMakeOb1'],
-      jbMakeOb2: json['jbMakeOb2'],
-      jbMakeRemark: json['jbMakeRemark'],
-
-      jbTypeOb1: json['jbTypeOb1'],
-      jbTypeOb2: json['jbTypeOb2'],
-      jbTypeRemark: json['jbTypeRemark'],
-
-      diodeModelOb1: json['diodeModelOb1'],
-      diodeModelOb2: json['diodeModelOb2'],
-      diodeModelRemark: json['diodeModelRemark'],
-
-      jbPlacementOb1: json['jbPlacementOb1'],
-      jbPlacementOb2: json['jbPlacementOb2'],
-      jbPlacementRemark: json['jbPlacementRemark'],
-
-      jbSealantWeightsAOb1: json['jbSealantWeightsAOb1'],
-      jbSealantWeightsAOb2: json['jbSealantWeightsAOb2'],
-      jbSealantWeightsBOb1: json['jbSealantWeightsBOb1'],
-      jbSealantWeightsBOb2: json['jbSealantWeightsBOb2'],
-      jbSealantWeightsCOb1: json['jbSealantWeightsCOb1'],
-      jbSealantWeightsCOb2: json['jbSealantWeightsCOb2'],
-      jbSealantWeightsRemark: json['jbSealantWeightsRemark'],
-
-      solderingQualityOb1: json['solderingQualityOb1'],
-      solderingQualityOb2: json['solderingQualityOb2'],
-      solderingQualityRemark: json['solderingQualityRemark'],
-
-      pottingSealantMakeOb1: json['pottingSealantMakeOb1'],
-      pottingSealantMakeOb2: json['pottingSealantMakeOb2'],
-      pottingSealantMakeRemark: json['pottingSealantMakeRemark'],
-
-      pottingSealantTypeOb1: json['pottingSealantTypeOb1'],
-      pottingSealantTypeOb2: json['pottingSealantTypeOb2'],
-      pottingSealantTypeRemark: json['pottingSealantTypeRemark'],
-
-      pottingSealantExpiryOb1: json['pottingSealantExpiryOb1'],
-      pottingSealantExpiryOb2: json['pottingSealantExpiryOb2'],
-      pottingSealantExpiryRemark: json['pottingSealantExpiryRemark'],
-
-      curingTimeOb1: json['curingTimeOb1'],
-      curingTimeOb2: json['curingTimeOb2'],
-      curingTimeRemark: json['curingTimeRemark'],
-
-      pottingSealantWeightsAOb1: json['pottingSealantWeightAOb1'],
-      pottingSealantWeightsAOb2: json['pottingSealantWeightAOb2'],
-
-      pottingSealantWeightsBOb1: json['pottingSealantWeightBOb1'],
-      pottingSealantWeightsBOb2: json['pottingSealantWeightBOb2'],
-
-      pottingSealantWeightsCOb1: json['pottingSealantWeightCOb1'],
-      pottingSealantWeightsCOb2: json['pottingSealantWeightCOb2'],
-      pottingSealantWeightsRemark: json['pottingSealantWeightCRemark'],
-
-      pottingRatioAOb1: json['pottingRatioAOb1'],
-      pottingRatioBOb1: json['pottingRatioBOb1'],
-      pottingRatioOb1: json['pottingRatioOb1'],
-      pottingRatioAOb2: json['pottingRatioAOb2'],
-      pottingRatioBOb2: json['pottingRatioBOb2'],
-      pottingRatioOb2: json['pottingRatioOb2'],
-      pottingRatioRemark: json['pottingRatioRemark'],
-
-      cableLengthOb1: json['cableLengthOb1'],
-      cableLengthOb2: json['cableLengthOb2'],
-      cableLengthRemark: json['cableLengthRemark'],
-
-      visualStatusOb1: json['visualStatusOb1'],
-      visualStatusOb2: json['visualStatusOb2'],
-      visualStatusRemark: json['visualStatusRemark'],
-
-      // Stage 16: Curing Line
-      curingTimeLineOb1: json['curingTimeLineOb1'],
-      curingTimeLineOb2: json['curingTimeLineOb2'],
-      curingTimeLineRemark: json['curingTimeLineRemark'],
-
-      curingTempOb1: json['curingTempOb1'],
-      curingTempOb2: json['curingTempOb2'],
-      curingTempRemark: json['curingTempRemark'],
-
-      curingHumidityOb1: json['curingHumidityOb1'],
-      curingHumidityOb2: json['curingHumidityOb2'],
-      curingHumidityRemark: json['curingHumidityRemark'],
-
-      // Stage 17: Module Cleaning
-      cleaningOkOb1: json['cleaningOkOb1'],
-      cleaningOkOb2: json['cleaningOkOb2'],
-      cleaningOkRemark: json['cleaningOkRemark'],
-
-      // Stage 18: Hi-Pot Testing
-      hipotSerialNoOb1: json['hipotSerialNoOb1'],
-      hipotSerialNoOb2: json['hipotSerialNoOb2'],
-      hipotSerialNoRemark: json['hipotSerialNoRemark'],
-
-      dcwOb1: json['dcwOb1'],
-      dcwOb2: json['dcwOb2'],
-      dcwRemark: json['dcwRemark'],
-
-      irOb1: json['irOb1'],
-      irOb2: json['irOb2'],
-      irRemark: json['irRemark'],
-
-      groundContinuityOb1: json['groundContinuityOb1'],
-      groundContinuityOb2: json['groundContinuityOb2'],
-      groundContinuityRemark: json['groundContinuityRemark'],
-
-      // Stage 19: Post-El Inspection
-      postElSerialNoOb1: json['postElSerialNoOb1'],
-      postElSerialNoOb2: json['postElSerialNoOb2'],
-      postElSerialNoRemark: json['postElSerialNoRemark'],
-
-      postElCurrentOb1: json['postElCurrentOb1'],
-      postElCurrentOb2: json['postElCurrentOb2'],
-      postElCurrentRemark: json['postElCurrentRemark'],
-
-      postElVoltageOb1: json['postElVoltageOb1'],
-      postElVoltageOb2: json['postElVoltageOb2'],
-      postElVoltageRemark: json['postElVoltageRemark'],
-
-      postElDefectsOb1: json['postElDefectsOb1'],
-      postElDefectsOb2: json['postElDefectsOb2'],
-      postElDefectsRemark: json['postElDefectsRemark'],
-
-      // Stage 20: Sun Simulator
-      calibrationDateOb1: json['calibrationDateOb1'],
-      calibrationDateOb2: json['calibrationDateOb2'],
-      calibrationDateRemark: json['calibrationDateRemark'],
-
-      sunSerialNoOb1: json['sunSerialNoOb1'],
-      sunSerialNoOb2: json['sunSerialNoOb2'],
-      sunSerialNoRemark: json['sunSerialNoRemark'],
-
-      modulePowerOb1: json['modulePowerOb1'],
-      modulePowerOb2: json['modulePowerOb2'],
-      modulePowerRemark: json['modulePowerRemark'],
-
-      iscOb1: json['iscOb1'],
-      iscOb2: json['iscOb2'],
-      iscRemark: json['iscRemark'],
-
-      vocOb1: json['vocOb1'],
-      vocOb2: json['vocOb2'],
-      vocRemark: json['vocRemark'],
-
-      impOb1: json['impOb1'],
-      impOb2: json['impOb2'],
-      impRemark: json['impRemark'],
-
-      vmpOb1: json['vmpOb1'],
-      vmpOb2: json['vmpOb2'],
-      vmpRemark: json['vmpRemark'],
-
-      moduleTempOb1: json['moduleTempOb1'],
-      moduleTempOb2: json['moduleTempOb2'],
-      moduleTempRemark: json['moduleTempRemark'],
-
-      fillFactorOb1: json['fillFactorOb1'],
-      fillFactorOb2: json['fillFactorOb2'],
-      fillFactorRemark: json['fillFactorRemark'],
-
-      efficiencyOb1: json['efficiencyOb1'],
-      efficiencyOb2: json['efficiencyOb2'],
-      efficiencyRemark: json['efficiencyRemark'],
-
-      ivCurveOkOb1: json['ivCurveOkOb1'],
-      ivCurveOkOb2: json['ivCurveOkOb2'],
-      ivCurveOkRemark: json['ivCurveOkRemark'],
-
-      // Stage 21: FQC
-      visualInspectionOb1: json['visualInspectionOb1'],
-      visualInspectionOb2: json['visualInspectionOb2'],
-      visualInspectionRemark: json['visualInspectionRemark'],
-
-      jbCoverFitmentOb1: json['jbCoverFitmentOb1'],
-      jbCoverFitmentOb2: json['jbCoverFitmentOb2'],
-      jbCoverFitmentRemark: json['jbCoverFitmentRemark'],
-
-      labelPlacementOb1: json['labelPlacementOb1'],
-      labelPlacementOb2: json['labelPlacementOb2'],
-      labelPlacementRemark: json['labelPlacementRemark'],
-
-      fqcDefectsOb1: json['fqcDefectsOb1'],
-      fqcDefectsOb2: json['fqcDefectsOb2'],
-      fqcDefectsRemark: json['fqcDefectsRemark'],
-
-      // Stage 22: Auto Sorter & Packing
-      sortingStatusOb1: json['sortingStatusOb1'],
-      sortingStatusOb2: json['sortingStatusOb2'],
-      sortingStatusRemark: json['sortingStatusRemark'],
-
-      palletConditionOb1: json['palletConditionOb1'],
-      palletConditionOb2: json['palletConditionOb2'],
-      palletConditionRemark: json['palletConditionRemark'],
-
-      frontNotesController: json['frontNotesController'],
-      backNotesController: json['backNotesController'],
     );
+
+    // Now set all the optional fields
+    // Stage 1: Floor
+    form.preLamTempOb1 = json['preLamTempOb1'];
+    form.preLamTempOb2 = json['preLamTempOb2'];
+    form.preLamTempRemark = json['preLamTempRemark'];
+
+    form.laminationTempOb1 = json['laminationTempOb1'];
+    form.laminationTempOb2 = json['laminationTempOb2'];
+    form.laminationTempRemark = json['laminationTempRemark'];
+
+    form.preLamHumidityOb1 = json['preLamHumidityOb1'];
+    form.preLamHumidityOb2 = json['preLamHumidityOb2'];
+    form.preLamHumidityRemark = json['preLamHumidityRemark'];
+
+    // Stage 2: Front Glass Loading
+    form.glassMakeOb1 = json['glassMakeOb1'];
+    form.glassMakeOb2 = json['glassMakeOb2'];
+    form.glassMakeRemark = json['glassMakeRemark'];
+
+    form.glassPalletNoOb1 = json['glassPalletNoOb1'];
+    form.glassPalletNoOb2 = json['glassPalletNoOb2'];
+    form.glassPalletNoRemark = json['glassPalletNoRemark'];
+
+    form.glassSizeOb1 = json['glassSizeOb1'];
+    form.glassSizeOb2 = json['glassSizeOb2'];
+    form.glassSizeRemark = json['glassSizeRemark'];
+
+    // Stage 3: Front side EVA Cutting
+    form.evaMakeOb1 = json['evaMakeOb1'];
+    form.evaMakeOb2 = json['evaMakeOb2'];
+    form.evaMakeRemark = json['evaMakeRemark'];
+
+    form.evaTypeOb1 = json['evaTypeOb1'];
+    form.evaTypeOb2 = json['evaTypeOb2'];
+    form.evaTypeRemark = json['evaTypeRemark'];
+
+    form.evaRollNoOb1 = json['evaRollNoOb1'];
+    form.evaRollNoOb2 = json['evaRollNoOb2'];
+    form.evaRollNoRemark = json['evaRollNoRemark'];
+
+    form.evaExpiryDateOb1 = json['evaExpiryDateOb1'];
+    form.evaExpiryDateOb2 = json['evaExpiryDateOb2'];
+    form.evaExpiryDateRemark = json['evaExpiryDateRemark'];
+
+    form.evaSizeOb1 = json['evaSizeOb1'];
+    form.evaSizeOb2 = json['evaSizeOb2'];
+    form.evaSizeRemark = json['evaSizeRemark'];
+
+    // Stage 4: Stringer
+    form.cellMakeOb1 = json['cellMakeOb1'];
+    form.cellMakeOb2 = json['cellMakeOb2'];
+    form.cellMakeRemark = json['cellMakeRemark'];
+
+    form.cellEfficiencyOb1 = json['cellEfficiencyOb1'];
+    form.cellEfficiencyOb2 = json['cellEfficiencyOb2'];
+    form.cellEfficiencyRemark = json['cellEfficiencyRemark'];
+
+    form.cellWattageOb1 = json['cellWattageOb1'];
+    form.cellWattageOb2 = json['cellWattageOb2'];
+    form.cellWattageRemark = json['cellWattageRemark'];
+
+    form.cellSizeOb1 = json['cellSizeOb1'];
+    form.cellSizeOb2 = json['cellSizeOb2'];
+    form.cellSizeRemark = json['cellSizeRemark'];
+
+    form.cellDefectsOb1 = json['cellDefectsOb1'];
+    form.cellDefectsOb2 = json['cellDefectsOb2'];
+    form.cellDefectsRemark = json['cellDefectsRemark'];
+
+    form.cleanlinessOb1 = json['cleanlinessOb1'];
+    form.cleanlinessOb2 = json['cleanlinessOb2'];
+    form.cleanlinessRemark = json['cleanlinessRemark'];
+
+    form.ribbonMakeOb1 = json['ribbonMakeOb1'];
+    form.ribbonMakeOb2 = json['ribbonMakeOb2'];
+    form.ribbonMakeRemark = json['ribbonMakeRemark'];
+
+    form.ribbonSizeOb1 = json['ribbonSizeOb1'];
+    form.ribbonSizeOb2 = json['ribbonSizeOb2'];
+    form.ribbonSizeRemark = json['ribbonSizeRemark'];
+
+    form.fluxMakeOb1 = json['fluxMakeOb1'];
+    form.fluxMakeOb2 = json['fluxMakeOb2'];
+    form.fluxMakeRemark = json['fluxMakeRemark'];
+
+    form.fluxTypeOb1 = json['fluxTypeOb1'];
+    form.fluxTypeOb2 = json['fluxTypeOb2'];
+    form.fluxTypeRemark = json['fluxTypeRemark'];
+
+    form.fluxExpiryDateOb1 = json['fluxExpiryDateOb1'];
+    form.fluxExpiryDateOb2 = json['fluxExpiryDateOb2'];
+    form.fluxExpiryDateRemark = json['fluxExpiryDateRemark'];
+
+    form.solderingTempOb1 = json['solderingTempOb1'];
+    form.solderingTempOb2 = json['solderingTempOb2'];
+    form.solderingTempRemark = json['solderingTempRemark'];
+
+    form.workingHeatersOb1 = json['workingHeatersOb1'];
+    form.workingHeatersOb2 = json['workingHeatersOb2'];
+    form.workingHeatersRemark = json['workingHeatersRemark'];
+
+    form.solderingPowerOb1 = json['solderingPowerOb1'];
+    form.solderingPowerOb2 = json['solderingPowerOb2'];
+    form.solderingPowerRemark = json['solderingPowerRemark'];
+
+    form.solderTimeOb1 = json['solderTimeOb1'];
+    form.solderTimeOb2 = json['solderTimeOb2'];
+    form.solderTimeRemark = json['solderTimeRemark'];
+
+    form.ribbonAlignmentOb1 = json['ribbonAlignmentOb1'];
+    form.ribbonAlignmentOb2 = json['ribbonAlignmentOb2'];
+    form.ribbonAlignmentRemark = json['ribbonAlignmentRemark'];
+
+    form.ribbonDimensionsOb1 = json['ribbonDimensionsOb1'];
+    form.ribbonDimensionsOb2 = json['ribbonDimensionsOb2'];
+    form.ribbonDimensionsRemark = json['ribbonDimensionsRemark'];
+
+    form.cellToCellGapOb1 = json['cellToCellGapOb1'];
+    form.cellToCellGapOb2 = json['cellToCellGapOb2'];
+    form.cellToCellGapRemark = json['cellToCellGapRemark'];
+
+    form.stringLengthOb1 = json['stringLengthOb1'];
+    form.stringLengthOb2 = json['stringLengthOb2'];
+    form.stringLengthRemark = json['stringLengthRemark'];
+
+    form.peelTestResultOb1 = json['peelTestResultOb1'];
+    form.peelTestResultOb2 = json['peelTestResultOb2'];
+    form.peelTestResultRemark = json['peelTestResultRemark'];
+
+    form.elInspectionOb1 = json['elInspectionOb1'];
+    form.elInspectionOb2 = json['elInspectionOb2'];
+    form.elInspectionRemark = json['elInspectionRemark'];
+
+    // Stage 5: Lay-up & Auto Bussing
+    form.busbarMakeOb1 = json['busbarMakeOb1'];
+    form.busbarMakeOb2 = json['busbarMakeOb2'];
+    form.busbarMakeRemark = json['busbarMakeRemark'];
+
+    form.busbarSizeOb1 = json['busbarSizeOb1'];
+    form.busbarSizeOb2 = json['busbarSizeOb2'];
+    form.busbarSizeRemark = json['busbarSizeRemark'];
+
+    form.cellToBusbarDistanceOb1 = json['cellToBusbarDistanceOb1'];
+    form.cellToBusbarDistanceOb2 = json['cellToBusbarDistanceOb2'];
+    form.cellToBusbarDistanceRemark = json['cellToBusbarDistanceRemark'];
+
+    form.stringToStringGapOb1 = json['stringToStringGapOb1'];
+    form.stringToStringGapOb2 = json['stringToStringGapOb2'];
+    form.stringToStringGapRemark = json['stringToStringGapRemark'];
+
+    form.topSideGapOb1 = json['topSideGapOb1'];
+    form.topSideGapOb2 = json['topSideGapOb2'];
+    form.topSideGapRemark = json['topSideGapRemark'];
+
+    form.middleSideGapOb1 = json['middleSideGapOb1'];
+    form.middleSideGapOb2 = json['middleSideGapOb2'];
+    form.middleSideGapRemark = json['middleSideGapRemark'];
+
+    form.bottomSideGapOb1 = json['bottomSideGapOb1'];
+    form.bottomSideGapOb2 = json['bottomSideGapOb2'];
+    form.bottomSideGapRemark = json['bottomSideGapRemark'];
+
+    form.leftSideGapOb1 = json['leftSideGapOb1'];
+    form.leftSideGapOb2 = json['leftSideGapOb2'];
+    form.leftSideGapRemark = json['leftSideGapRemark'];
+
+    form.rightSideGapOb1 = json['rightSideGapOb1'];
+    form.rightSideGapOb2 = json['rightSideGapOb2'];
+    form.rightSideGapRemark = json['rightSideGapRemark'];
+
+    // Stage 6: Auto Tapping
+    form.tapMakeOb1 = json['tapMakeOb1'];
+    form.tapMakeOb2 = json['tapMakeOb2'];
+    form.tapMakeRemark = json['tapMakeRemark'];
+
+    form.tapPositionOb1 = json['tapPositionOb1'];
+    form.tapPositionOb2 = json['tapPositionOb2'];
+    form.tapPositionRemark = json['tapPositionRemark'];
+
+    form.tapSizeOb1 = json['tapSizeOb1'];
+    form.tapSizeOb2 = json['tapSizeOb2'];
+    form.tapSizeRemark = json['tapSizeRemark'];
+
+    // Stage 7: Rear side EVA Cutting
+    form.rearEvaMakeOb1 = json['rearEvaMakeOb1'];
+    form.rearEvaMakeOb2 = json['rearEvaMakeOb2'];
+    form.rearEvaMakeRemark = json['rearEvaMakeRemark'];
+
+    form.rearEvaTypeOb1 = json['rearEvaTypeOb1'];
+    form.rearEvaTypeOb2 = json['rearEvaTypeOb2'];
+    form.rearEvaTypeRemark = json['rearEvaTypeRemark'];
+
+    form.rearEvaRollNoOb1 = json['rearEvaRollNoOb1'];
+    form.rearEvaRollNoOb2 = json['rearEvaRollNoOb2'];
+    form.rearEvaRollNoRemark = json['rearEvaRollNoRemark'];
+
+    form.rearEvaExpiryDateOb1 = json['rearEvaExpiryDateOb1'];
+    form.rearEvaExpiryDateOb2 = json['rearEvaExpiryDateOb2'];
+    form.rearEvaExpiryDateRemark = json['rearEvaExpiryDateRemark'];
+
+    form.rearEvaSizeOb1 = json['rearEvaSizeOb1'];
+    form.rearEvaSizeOb2 = json['rearEvaSizeOb2'];
+    form.rearEvaSizeRemark = json['rearEvaSizeRemark'];
+
+    // Stage 8: Rear Side Back Sheet/Glass
+    form.backsheetMakeOb1 = json['backsheetMakeOb1'];
+    form.backsheetMakeOb2 = json['backsheetMakeOb2'];
+    form.backsheetMakeRemark = json['backsheetMakeRemark'];
+
+    form.backsheetTypeOb1 = json['backsheetTypeOb1'];
+    form.backsheetTypeOb2 = json['backsheetTypeOb2'];
+    form.backsheetTypeRemark = json['backsheetTypeRemark'];
+
+    form.backsheetRollNoOb1 = json['backsheetRollNoOb1'];
+    form.backsheetRollNoOb2 = json['backsheetRollNoOb2'];
+    form.backsheetRollNoRemark = json['backsheetRollNoRemark'];
+
+    form.backsheetDimensionsOb1 = json['backsheetDimensionsOb1'];
+    form.backsheetDimensionsOb2 = json['backsheetDimensionsOb2'];
+    form.backsheetDimensionsRemark = json['backsheetDimensionsRemark'];
+
+    // Stage 9: Logo & Barcode Fixing
+    form.logoPositionOkOb1 = json['logoPositionOkOb1'];
+    form.logoPositionOkOb2 = json['logoPositionOkOb2'];
+    form.logoPositionOkRemark = json['logoPositionOkRemark'];
+
+    form.barcodePositionOkOb1 = json['barcodePositionOkOb1'];
+    form.barcodePositionOkOb2 = json['barcodePositionOkOb2'];
+    form.barcodePositionOkRemark = json['barcodePositionOkRemark'];
+
+    // Continue for remaining stages...
+    // Stage 10: Pre-El Inspection
+    form.preElSerialNoOb1 = json['preElSerialNoOb1'];
+    form.preElSerialNoOb2 = json['preElSerialNoOb2'];
+    form.preElSerialNoRemark = json['preElSerialNoRemark'];
+
+    form.preElCurrentOb1 = json['preElCurrentOb1'];
+    form.preElCurrentOb2 = json['preElCurrentOb2'];
+    form.preElCurrentRemark = json['preElCurrentRemark'];
+
+    form.preElVoltageOb1 = json['preElVoltageOb1'];
+    form.preElVoltageOb2 = json['preElVoltageOb2'];
+    form.preElVoltageRemark = json['preElVoltageRemark'];
+
+    form.preElDefectsOb1 = json['preElDefectsOb1'];
+    form.preElDefectsOb2 = json['preElDefectsOb2'];
+    form.preElDefectsRemark = json['preElDefectsRemark'];
+
+    // Stage 11: Auto Edge Taping
+    form.edgeTapingOkOb1 = json['edgeTapingOkOb1'];
+    form.edgeTapingOkOb2 = json['edgeTapingOkOb2'];
+    form.edgeTapingOkRemark = json['edgeTapingOkRemark'];
+
+    // Stage 12: Lamination Process
+    form.laminatorNoOb1 = json['laminatorNoOb1'];
+    form.laminatorNoOb2 = json['laminatorNoOb2'];
+    form.laminatorNoRemark = json['laminatorNoRemark'];
+
+    // For lamination temps (converting from individual fields)
+    form.laminationTempsCh01Ob1 = json['laminationTempsCh01Ob1'];
+    form.laminationTempsCh01Ob2 = json['laminationTempsCh01Ob2'];
+
+    form.laminationTempsCh02Ob1 = json['laminationTempsCh02Ob1'];
+    form.laminationTempsCh02Ob2 = json['laminationTempsCh02Ob2'];
+
+    form.laminationTempsCh03Ob1 = json['laminationTempsCh03Ob1'];
+    form.laminationTempsCh03Ob2 = json['laminationTempsCh03Ob2'];
+    form.laminationTempsRemark = json['laminationTempsRemark'];
+
+    form.vacuumTimesCh01Ob1 = json['vacuumTimesCh01Ob1'];
+    form.vacuumTimesCh01Ob2 = json['vacuumTimesCh01Ob2'];
+
+    form.vacuumTimesCh02Ob1 = json['vacuumTimesCh02Ob1'];
+    form.vacuumTimesCh02Ob2 = json['vacuumTimesCh02Ob2'];
+
+    form.vacuumTimesCh03Ob1 = json['vacuumTimesCh03Ob1'];
+    form.vacuumTimesCh03Ob2 = json['vacuumTimesCh03Ob2'];
+    form.vacuumTimesRemark = json['vacuumTimesRemark'];
+
+    // upper Vent 1
+    form.upperventOneCh01Ob1 = json['upperventOneCh01Ob1'];
+    form.upperventOneCh01Ob2 = json['upperventOneCh01Ob2'];
+
+    form.upperventOneCh02Ob1 = json['upperventOneCh02Ob1'];
+    form.upperventOneCh02Ob2 = json['upperventOneCh02Ob2'];
+
+    form.upperventOneCh03Ob1 = json['upperventOneCh03Ob1'];
+    form.upperventOneCh03Ob2 = json['upperventOneCh03Ob2'];
+    form.upperventOneRemark = json['upperventOneRemark'];
+
+    // lamination 1
+    form.laminationOneCh01Ob1 = json['laminationOneCh01Ob1'];
+    form.laminationOneCh01Ob2 = json['laminationOneCh01Ob2'];
+
+    form.laminationOneCh02Ob1 = json['laminationOneCh02Ob1'];
+    form.laminationOneCh02Ob2 = json['laminationOneCh02Ob2'];
+
+    form.laminationOneCh03Ob1 = json['laminationOneCh03Ob1'];
+    form.laminationOneCh03Ob2 = json['laminationOneCh03Ob2'];
+    form.laminationOneRemark = json['laminationOneRemark'];
+
+    // upper Vent 2
+    form.upperventSecCh01Ob1 = json['upperventSecCh01Ob1'];
+    form.upperventSecCh01Ob2 = json['upperventSecCh01Ob2'];
+
+    form.upperventSecCh02Ob1 = json['upperventSecCh02Ob1'];
+    form.upperventSecCh02Ob2 = json['upperventSecCh02Ob2'];
+
+    form.upperventSecCh03Ob1 = json['upperventSecCh03Ob1'];
+    form.upperventSecCh03Ob2 = json['upperventSecCh03Ob2'];
+    form.upperventSecRemark = json['upperventSecRemark'];
+
+    // lamination 2
+    form.laminationSecCh01Ob1 = json['laminationSecCh01Ob1'];
+    form.laminationSecCh01Ob2 = json['laminationSecCh01Ob2'];
+
+    form.laminationSecCh02Ob1 = json['laminationSecCh02Ob1'];
+    form.laminationSecCh02Ob2 = json['laminationSecCh02Ob2'];
+
+    form.laminationSecCh03Ob1 = json['laminationSecCh03Ob1'];
+    form.laminationSecCh03Ob2 = json['laminationSecCh03Ob2'];
+    form.laminationSecRemark = json['laminationSecRemark'];
+
+    // upper Vent 3
+    form.upperventThirdCh01Ob1 = json['upperventThirdCh01Ob1'];
+    form.upperventThirdCh01Ob2 = json['upperventThirdCh01Ob2'];
+
+    form.upperventThirdCh02Ob1 = json['upperventThirdCh02Ob1'];
+    form.upperventThirdCh02Ob2 = json['upperventThirdCh02Ob2'];
+
+    form.upperventThirdCh03Ob1 = json['upperventThirdCh03Ob1'];
+    form.upperventThirdCh03Ob2 = json['upperventThirdCh03Ob2'];
+    form.upperventThirdRemark = json['upperventThirdRemark'];
+
+    // lamination 3
+    form.laminationThirdCh01Ob1 = json['laminationThirdCh01Ob1'];
+    form.laminationThirdCh01Ob2 = json['laminationThirdCh01Ob2'];
+
+    form.laminationThirdCh02Ob1 = json['laminationThirdCh02Ob1'];
+    form.laminationThirdCh02Ob2 = json['laminationThirdCh02Ob2'];
+
+    form.laminationThirdCh03Ob1 = json['laminationThirdCh03Ob1'];
+    form.laminationThirdCh03Ob2 = json['laminationThirdCh03Ob2'];
+    form.laminationThirdRemark = json['laminationThirdRemark'];
+
+    // lowe vent time
+    form.lowerVentTimeCh01Ob1 = json['lowerVentTimeCh01Ob1'];
+    form.lowerVentTimeCh01Ob2 = json['lowerVentTimeCh01Ob2'];
+
+    form.lowerVentTimeCh02Ob1 = json['lowerVentTimeCh02Ob1'];
+    form.lowerVentTimeCh02Ob2 = json['lowerVentTimeCh02Ob2'];
+
+    form.lowerVentTimeCh03Ob1 = json['lowerVentTimeCh03Ob1'];
+    form.lowerVentTimeCh03Ob2 = json['lowerVentTimeCh03Ob2'];
+    form.lowerVentTimeRemark = json['lowerVentTimeRemark'];
+
+    // Total cycle time
+    form.totalCycleTimeCh01Ob1 = json['totalCycleTimeCh01Ob1'];
+    form.totalCycleTimeCh01Ob2 = json['totalCycleTimeCh01Ob2'];
+
+    form.totalCycleTimeCh02Ob1 = json['totalCycleTimeCh02Ob1'];
+    form.totalCycleTimeCh02Ob2 = json['totalCycleTimeCh02Ob2'];
+
+    form.totalCycleTimeCh03Ob1 = json['totalCycleTimeCh03Ob1'];
+    form.totalCycleTimeCh03Ob2 = json['totalCycleTimeCh03Ob2'];
+    form.totalCycleTimeRemark = json['totalCycleTimeRemark'];
+
+    // Stage 13: Auto Edge Trimming
+    form.trimmingOkOb1 = json['trimmingOkOb1'];
+    form.trimmingOkOb2 = json['trimmingOkOb2'];
+    form.trimmingOkRemark = json['trimmingOkRemark'];
+
+    // Stage 14: Framing Process
+    form.frameSerialNoOb1 = json['frameSerialNoOb1'];
+    form.frameSerialNoOb2 = json['frameSerialNoOb2'];
+    form.frameSerialNoRemark = json['frameSerialNoRemark'];
+
+    form.frameMakeOb1 = json['frameMakeOb1'];
+    form.frameMakeOb2 = json['frameMakeOb2'];
+    form.frameMakeRemark = json['frameMakeRemark'];
+
+    form.cornerKeyMakeOb1 = json['cornerKeyMakeOb1'];
+    form.cornerKeyMakeOb2 = json['cornerKeyMakeOb2'];
+    form.cornerKeyMakeRemark = json['cornerKeyMakeRemark'];
+
+    form.profileCutAngleOb1 = json['profileCutAngleOb1'];
+    form.profileCutAngleOb2 = json['profileCutAngleOb2'];
+    form.profileCutAngleRemark = json['profileCutAngleRemark'];
+
+    form.frameLengthOb1 = json['frameLengthOb1'];
+    form.frameLengthOb2 = json['frameLengthOb2'];
+    form.frameLengthRemark = json['frameLengthRemark'];
+
+    form.frameWidthOb1 = json['frameWidthOb1'];
+    form.frameWidthOb2 = json['frameWidthOb2'];
+    form.frameWidthRemark = json['frameWidthRemark'];
+
+    form.frameHeightOb1 = json['frameHeightOb1'];
+    form.frameHeightOb2 = json['frameHeightOb2'];
+    form.frameHeightRemark = json['frameHeightRemark'];
+
+    form.mountingHoleOb1 = json['mountingHoleOb1'];
+    form.mountingHoleOb2 = json['mountingHoleOb2'];
+    form.mountingHoleRemark = json['mountingHoleRemark'];
+
+    form.xPitchOb1 = json['xPitchOb1'];
+    form.xPitchOb2 = json['xPitchOb2'];
+    form.xPitchRemark = json['xPitchRemark'];
+
+    form.yPitchOb1 = json['yPitchOb1'];
+    form.yPitchOb2 = json['yPitchOb2'];
+    form.yPitchRemark = json['yPitchRemark'];
+
+    form.groundHoleDiaOb1 = json['groundHoleDiaOb1'];
+    form.groundHoleDiaOb2 = json['groundHoleDiaOb2'];
+    form.groundHoleDiaRemark = json['groundHoleDiaRemark'];
+
+    form.groundHoleDistanceOb1 = json['groundHoleDistanceOb1'];
+    form.groundHoleDistanceOb2 = json['groundHoleDistanceOb2'];
+    form.groundHoleDistanceRemark = json['groundHoleDistanceRemark'];
+
+    form.drainHoleSizeOb1 = json['drainHoleSizeOb1'];
+    form.drainHoleSizeOb2 = json['drainHoleSizeOb2'];
+    form.drainHoleSizeRemark = json['drainHoleSizeRemark'];
+
+    form.drainHoleDistanceOb1 = json['drainHoleDistanceOb1'];
+    form.drainHoleDistanceOb2 = json['drainHoleDistanceOb2'];
+    form.drainHoleDistanceRemark = json['drainHoleDistanceRemark'];
+
+    form.diagonalLengthOb1 = json['diagonalLengthOb1'];
+    form.diagonalLengthOb2 = json['diagonalLengthOb2'];
+    form.diagonalLengthRemark = json['diagonalLengthRemark'];
+
+    form.sealantMakeOb1 = json['sealantMakeOb1'];
+    form.sealantMakeOb2 = json['sealantMakeOb2'];
+    form.sealantMakeRemark = json['sealantMakeRemark'];
+
+    form.scratchDentsOb1 = json['scratchDentsOb1'];
+    form.scratchDentsOb2 = json['scratchDentsOb2'];
+    form.scratchDentsRemark = json['scratchDentsRemark'];
+
+    form.sealantTypeOb1 = json['sealantTypeOb1'];
+    form.sealantTypeOb2 = json['sealantTypeOb2'];
+    form.sealantTypeRemark = json['sealantTypeRemark'];
+
+    form.sealantWeightOb1 = json['sealantWeightOb1'];
+    form.sealantWeightOb2 = json['sealantWeightOb2'];
+    form.sealantWeightRemark = json['sealantWeightRemark'];
+
+    form.frameDefectsOb1 = json['frameDefectsOb1'];
+    form.frameDefectsOb2 = json['frameDefectsOb2'];
+    form.frameDefectsRemark = json['frameDefectsRemark'];
+
+    // Stage 15: Junction Box Assembly
+    form.jbSerialNoOb1 = json['jbSerialNoOb1'];
+    form.jbSerialNoOb2 = json['jbSerialNoOb2'];
+    form.jbSerialNoRemark = json['jbSerialNoRemark'];
+
+    form.jbMakeOb1 = json['jbMakeOb1'];
+    form.jbMakeOb2 = json['jbMakeOb2'];
+    form.jbMakeRemark = json['jbMakeRemark'];
+
+    form.jbTypeOb1 = json['jbTypeOb1'];
+    form.jbTypeOb2 = json['jbTypeOb2'];
+    form.jbTypeRemark = json['jbTypeRemark'];
+
+    form.diodeModelOb1 = json['diodeModelOb1'];
+    form.diodeModelOb2 = json['diodeModelOb2'];
+    form.diodeModelRemark = json['diodeModelRemark'];
+
+    form.jbPlacementOb1 = json['jbPlacementOb1'];
+    form.jbPlacementOb2 = json['jbPlacementOb2'];
+    form.jbPlacementRemark = json['jbPlacementRemark'];
+
+    form.jbSealantWeightsAOb1 = json['jbSealantWeightsAOb1'];
+    form.jbSealantWeightsAOb2 = json['jbSealantWeightsAOb2'];
+    form.jbSealantWeightsBOb1 = json['jbSealantWeightsBOb1'];
+    form.jbSealantWeightsBOb2 = json['jbSealantWeightsBOb2'];
+    form.jbSealantWeightsCOb1 = json['jbSealantWeightsCOb1'];
+    form.jbSealantWeightsCOb2 = json['jbSealantWeightsCOb2'];
+    form.jbSealantWeightsRemark = json['jbSealantWeightsRemark'];
+
+    form.solderingQualityOb1 = json['solderingQualityOb1'];
+    form.solderingQualityOb2 = json['solderingQualityOb2'];
+    form.solderingQualityRemark = json['solderingQualityRemark'];
+
+    form.pottingSealantMakeOb1 = json['pottingSealantMakeOb1'];
+    form.pottingSealantMakeOb2 = json['pottingSealantMakeOb2'];
+    form.pottingSealantMakeRemark = json['pottingSealantMakeRemark'];
+
+    form.pottingSealantTypeOb1 = json['pottingSealantTypeOb1'];
+    form.pottingSealantTypeOb2 = json['pottingSealantTypeOb2'];
+    form.pottingSealantTypeRemark = json['pottingSealantTypeRemark'];
+
+    form.pottingSealantExpiryOb1 = json['pottingSealantExpiryOb1'];
+    form.pottingSealantExpiryOb2 = json['pottingSealantExpiryOb2'];
+    form.pottingSealantExpiryRemark = json['pottingSealantExpiryRemark'];
+
+    form.curingTimeOb1 = json['curingTimeOb1'];
+    form.curingTimeOb2 = json['curingTimeOb2'];
+    form.curingTimeRemark = json['curingTimeRemark'];
+
+    form.pottingSealantWeightsAOb1 = json['pottingSealantWeightAOb1'];
+    form.pottingSealantWeightsAOb2 = json['pottingSealantWeightAOb2'];
+
+    form.pottingSealantWeightsBOb1 = json['pottingSealantWeightBOb1'];
+    form.pottingSealantWeightsBOb2 = json['pottingSealantWeightBOb2'];
+
+    form.pottingSealantWeightsCOb1 = json['pottingSealantWeightCOb1'];
+    form.pottingSealantWeightsCOb2 = json['pottingSealantWeightCOb2'];
+    form.pottingSealantWeightsRemark = json['pottingSealantWeightCRemark'];
+
+    form.pottingRatioAOb1 = json['pottingRatioAOb1'];
+    form.pottingRatioBOb1 = json['pottingRatioBOb1'];
+    form.pottingRatioOb1 = json['pottingRatioOb1'];
+    form.pottingRatioAOb2 = json['pottingRatioAOb2'];
+    form.pottingRatioBOb2 = json['pottingRatioBOb2'];
+    form.pottingRatioOb2 = json['pottingRatioOb2'];
+    form.pottingRatioRemark = json['pottingRatioRemark'];
+
+    form.cableLengthOb1 = json['cableLengthOb1'];
+    form.cableLengthOb2 = json['cableLengthOb2'];
+    form.cableLengthRemark = json['cableLengthRemark'];
+
+    form.visualStatusOb1 = json['visualStatusOb1'];
+    form.visualStatusOb2 = json['visualStatusOb2'];
+    form.visualStatusRemark = json['visualStatusRemark'];
+
+    // Stage 16: Curing Line
+    form.curingTimeLineOb1 = json['curingTimeLineOb1'];
+    form.curingTimeLineOb2 = json['curingTimeLineOb2'];
+    form.curingTimeLineRemark = json['curingTimeLineRemark'];
+
+    form.curingTempOb1 = json['curingTempOb1'];
+    form.curingTempOb2 = json['curingTempOb2'];
+    form.curingTempRemark = json['curingTempRemark'];
+
+    form.curingHumidityOb1 = json['curingHumidityOb1'];
+    form.curingHumidityOb2 = json['curingHumidityOb2'];
+    form.curingHumidityRemark = json['curingHumidityRemark'];
+
+    // Stage 17: Module Cleaning
+    form.cleaningOkOb1 = json['cleaningOkOb1'];
+    form.cleaningOkOb2 = json['cleaningOkOb2'];
+    form.cleaningOkRemark = json['cleaningOkRemark'];
+
+    // Stage 18: Hi-Pot Testing
+    form.hipotSerialNoOb1 = json['hipotSerialNoOb1'];
+    form.hipotSerialNoOb2 = json['hipotSerialNoOb2'];
+    form.hipotSerialNoRemark = json['hipotSerialNoRemark'];
+
+    form.dcwOb1 = json['dcwOb1'];
+    form.dcwOb2 = json['dcwOb2'];
+    form.dcwRemark = json['dcwRemark'];
+
+    form.irOb1 = json['irOb1'];
+    form.irOb2 = json['irOb2'];
+    form.irRemark = json['irRemark'];
+
+    form.groundContinuityOb1 = json['groundContinuityOb1'];
+    form.groundContinuityOb2 = json['groundContinuityOb2'];
+    form.groundContinuityRemark = json['groundContinuityRemark'];
+
+    // Stage 19: Post-El Inspection
+    form.postElSerialNoOb1 = json['postElSerialNoOb1'];
+    form.postElSerialNoOb2 = json['postElSerialNoOb2'];
+    form.postElSerialNoRemark = json['postElSerialNoRemark'];
+
+    form.postElCurrentOb1 = json['postElCurrentOb1'];
+    form.postElCurrentOb2 = json['postElCurrentOb2'];
+    form.postElCurrentRemark = json['postElCurrentRemark'];
+
+    form.postElVoltageOb1 = json['postElVoltageOb1'];
+    form.postElVoltageOb2 = json['postElVoltageOb2'];
+    form.postElVoltageRemark = json['postElVoltageRemark'];
+
+    form.postElDefectsOb1 = json['postElDefectsOb1'];
+    form.postElDefectsOb2 = json['postElDefectsOb2'];
+    form.postElDefectsRemark = json['postElDefectsRemark'];
+
+    // Stage 20: Sun Simulator
+    form.calibrationDateOb1 = json['calibrationDateOb1'];
+    form.calibrationDateOb2 = json['calibrationDateOb2'];
+    form.calibrationDateRemark = json['calibrationDateRemark'];
+
+    form.sunSerialNoOb1 = json['sunSerialNoOb1'];
+    form.sunSerialNoOb2 = json['sunSerialNoOb2'];
+    form.sunSerialNoRemark = json['sunSerialNoRemark'];
+
+    form.modulePowerOb1 = json['modulePowerOb1'];
+    form.modulePowerOb2 = json['modulePowerOb2'];
+    form.modulePowerRemark = json['modulePowerRemark'];
+
+    form.iscOb1 = json['iscOb1'];
+    form.iscOb2 = json['iscOb2'];
+    form.iscRemark = json['iscRemark'];
+
+    form.vocOb1 = json['vocOb1'];
+    form.vocOb2 = json['vocOb2'];
+    form.vocRemark = json['vocRemark'];
+
+    form.impOb1 = json['impOb1'];
+    form.impOb2 = json['impOb2'];
+    form.impRemark = json['impRemark'];
+
+    form.vmpOb1 = json['vmpOb1'];
+    form.vmpOb2 = json['vmpOb2'];
+    form.vmpRemark = json['vmpRemark'];
+
+    form.moduleTempOb1 = json['moduleTempOb1'];
+    form.moduleTempOb2 = json['moduleTempOb2'];
+    form.moduleTempRemark = json['moduleTempRemark'];
+
+    form.fillFactorOb1 = json['fillFactorOb1'];
+    form.fillFactorOb2 = json['fillFactorOb2'];
+    form.fillFactorRemark = json['fillFactorRemark'];
+
+    form.efficiencyOb1 = json['efficiencyOb1'];
+    form.efficiencyOb2 = json['efficiencyOb2'];
+    form.efficiencyRemark = json['efficiencyRemark'];
+
+    form.ivCurveOkOb1 = json['ivCurveOkOb1'];
+    form.ivCurveOkOb2 = json['ivCurveOkOb2'];
+    form.ivCurveOkRemark = json['ivCurveOkRemark'];
+
+    // Stage 21: FQC
+    form.visualInspectionOb1 = json['visualInspectionOb1'];
+    form.visualInspectionOb2 = json['visualInspectionOb2'];
+    form.visualInspectionRemark = json['visualInspectionRemark'];
+
+    form.jbCoverFitmentOb1 = json['jbCoverFitmentOb1'];
+    form.jbCoverFitmentOb2 = json['jbCoverFitmentOb2'];
+    form.jbCoverFitmentRemark = json['jbCoverFitmentRemark'];
+
+    form.labelPlacementOb1 = json['labelPlacementOb1'];
+    form.labelPlacementOb2 = json['labelPlacementOb2'];
+    form.labelPlacementRemark = json['labelPlacementRemark'];
+
+    form.fqcDefectsOb1 = json['fqcDefectsOb1'];
+    form.fqcDefectsOb2 = json['fqcDefectsOb2'];
+    form.fqcDefectsRemark = json['fqcDefectsRemark'];
+
+    // Stage 22: Auto Sorter & Packing
+    form.sortingStatusOb1 = json['sortingStatusOb1'];
+    form.sortingStatusOb2 = json['sortingStatusOb2'];
+    form.sortingStatusRemark = json['sortingStatusRemark'];
+
+    form.palletConditionOb1 = json['palletConditionOb1'];
+    form.palletConditionOb2 = json['palletConditionOb2'];
+    form.palletConditionRemark = json['palletConditionRemark'];
+
+    form.frontNotesController = json['frontNotesController'];
+    form.backNotesController = json['backNotesController'];
+
+    return form;
   }
 }

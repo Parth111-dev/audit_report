@@ -1,12 +1,13 @@
 // services/audit_service.dart
 import 'package:flutter/foundation.dart';
 import '../models/audit_model.dart';
+import '../models/base_audit_model.dart';
 import 'database_service.dart';
 
 class AuditService extends ChangeNotifier {
   final DatabaseService _databaseService = DatabaseService();
 
-  Future<bool> updateAudit(AuditForm audit) async {
+  Future<bool> updateAudit(dynamic audit) async {
     try {
       await _databaseService.updateAudit(audit);
       notifyListeners();
@@ -17,8 +18,7 @@ class AuditService extends ChangeNotifier {
     }
   }
 
-
-  Future<AuditForm?> getAuditById(String id) async {
+  Future<dynamic> getAuditById(String id) async {
     try {
       final audits = await _databaseService.getAudits();
       return audits.firstWhere(
