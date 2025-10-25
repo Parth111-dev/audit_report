@@ -36,10 +36,7 @@ class AuditCard extends StatelessWidget {
                   ),
                   child: Text(
                     'Completed',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 12,
-                    ),
+                    style: TextStyle(color: Colors.green, fontSize: 12),
                   ),
                 ),
               ],
@@ -78,9 +75,5 @@ class AuditCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.day}/${date.month}/${date.year}';
   }
 }

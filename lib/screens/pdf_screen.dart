@@ -409,9 +409,7 @@ class _PdfScreenState extends State<PdfScreen> {
   }
 
   pw.Widget _buildPdfTitle() {
-    // This method is only called when we need to generate a PDF from audit data
-    // If we already have a PDF document (widget.pdf), we don't need to call this method
-
+   
     if (widget.audit == null) {
       // If there's no audit data, return a simple title
       return pw.Container(

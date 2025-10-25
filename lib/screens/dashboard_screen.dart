@@ -171,10 +171,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
         connectionStatus['connectionType'] == ConnectionType.local;
 
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text('Audit Dashboard'),
+        title: Text(
+          'Audit Dashboard',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            letterSpacing: 0.5,
+          ),
+        ),
         backgroundColor: Colors.blue[700],
         elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[700]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
         actions: [
           // Database connection indicator
           Tooltip(
@@ -194,12 +211,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
             ),
           ),
-          IconButton(icon: Icon(Icons.refresh), onPressed: _loadData),
-          IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              Navigator.pushNamed(context, '/user-management');
-            },
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.refresh_rounded),
+              onPressed: _loadData,
+              tooltip: 'Refresh',
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.person_rounded),
+              onPressed: () {
+                Navigator.pushNamed(context, '/user-management');
+              },
+              tooltip: 'User Management',
+            ),
           ),
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -227,21 +263,75 @@ class _DashboardScreenState extends State<DashboardScreen> {
           _loadData();
           return Future.delayed(Duration(seconds: 1));
         },
-        child: Padding(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Welcome message
-              Text(
-                'Welcome, ${authService.currentUser?.fullName ?? 'User'}!',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[700],
+              // Welcome Card
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Colors.blue[600]!, Colors.blue[800]!],
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blue.withOpacity(0.3),
+                      blurRadius: 12,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(
+                        Icons.waving_hand_rounded,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Welcome Back!',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white.withOpacity(0.9),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            authService.currentUser?.fullName ?? 'User',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 24),
 
               // Statistics Section
               FutureBuilder<Map<String, int>>(
@@ -261,138 +351,241 @@ class _DashboardScreenState extends State<DashboardScreen> {
               SizedBox(height: 24),
 
               // Search Bar
-              TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search by serial number, auditor, or module type',
-                  prefixIcon: Icon(Icons.search),
-                  suffixIcon: _searchQuery.isNotEmpty
-                      ? IconButton(
-                          icon: Icon(Icons.clear),
-                          onPressed: () {
-                            _searchController.clear();
-                            _performSearch('');
-                          },
-                        )
-                      : null,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: 0,
-                    horizontal: 16,
-                  ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
-                onChanged: _performSearch,
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText:
+                        'Search by serial number, auditor, or module type',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    prefixIcon: Icon(
+                      Icons.search_rounded,
+                      color: Colors.blue[600],
+                    ),
+                    suffixIcon: _searchQuery.isNotEmpty
+                        ? IconButton(
+                            icon: Icon(
+                              Icons.clear_rounded,
+                              color: Colors.grey[600],
+                            ),
+                            onPressed: () {
+                              _searchController.clear();
+                              _performSearch('');
+                            },
+                          )
+                        : null,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 20,
+                    ),
+                  ),
+                  onChanged: _performSearch,
+                ),
               ),
 
-              SizedBox(height: 16),
+              SizedBox(height: 20),
 
               // Recent Audits Section with Filter
               Row(
                 children: [
-                  Text(
-                    _filterLabel,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[800],
+                  Expanded(
+                    child: Text(
+                      _filterLabel,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[800],
+                        letterSpacing: 0.3,
+                      ),
                     ),
                   ),
-                  Spacer(),
                   // Filter dropdown
-                  PopupMenuButton<FilterPeriod>(
-                    icon: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.filter_list),
-                        SizedBox(width: 4),
-                        Text('Filter'),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 6,
+                          offset: Offset(0, 2),
+                        ),
                       ],
                     ),
-                    onSelected: _changeFilter,
-                    itemBuilder: (BuildContext context) => [
-                      PopupMenuItem<FilterPeriod>(
-                        value: FilterPeriod.all,
-                        child: Text('All Reports'),
+                    child: PopupMenuButton<FilterPeriod>(
+                      icon: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.filter_list_rounded,
+                            color: Colors.blue[700],
+                          ),
+                          SizedBox(width: 6),
+                          Text(
+                            'Filter',
+                            style: TextStyle(
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                      PopupMenuItem<FilterPeriod>(
-                        value: FilterPeriod.today,
-                        child: Text('Today'),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      PopupMenuItem<FilterPeriod>(
-                        value: FilterPeriod.thisWeek,
-                        child: Text('This Week'),
-                      ),
-                      PopupMenuItem<FilterPeriod>(
-                        value: FilterPeriod.thisMonth,
-                        child: Text('This Month'),
-                      ),
-                      PopupMenuItem<FilterPeriod>(
-                        value: FilterPeriod.custom,
-                        child: Text('Custom Date Range'),
-                      ),
-                    ],
-                  ),
-                  SizedBox(width: 8),
-                  TextButton(
-                    onPressed: _loadData,
-                    child: Row(
-                      children: [
-                        Icon(Icons.refresh, size: 16),
-                        SizedBox(width: 4),
-                        Text('Refresh'),
+                      onSelected: _changeFilter,
+                      itemBuilder: (BuildContext context) => [
+                        PopupMenuItem<FilterPeriod>(
+                          value: FilterPeriod.all,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.all_inclusive,
+                                size: 18,
+                                color: Colors.grey[700],
+                              ),
+                              SizedBox(width: 8),
+                              Text('All Reports'),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem<FilterPeriod>(
+                          value: FilterPeriod.today,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.today_rounded,
+                                size: 18,
+                                color: Colors.grey[700],
+                              ),
+                              SizedBox(width: 8),
+                              Text('Today'),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem<FilterPeriod>(
+                          value: FilterPeriod.thisWeek,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.date_range_rounded,
+                                size: 18,
+                                color: Colors.grey[700],
+                              ),
+                              SizedBox(width: 8),
+                              Text('This Week'),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem<FilterPeriod>(
+                          value: FilterPeriod.thisMonth,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_month_rounded,
+                                size: 18,
+                                color: Colors.grey[700],
+                              ),
+                              SizedBox(width: 8),
+                              Text('This Month'),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem<FilterPeriod>(
+                          value: FilterPeriod.custom,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today_rounded,
+                                size: 18,
+                                color: Colors.grey[700],
+                              ),
+                              SizedBox(width: 8),
+                              Text('Custom Date Range'),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 20),
 
-              Expanded(
-                child: FutureBuilder<List<dynamic>>(
-                  future: _auditsFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                      // Sort by date descending (latest first)
-                      final sortedAudits = snapshot.data!
-                        ..sort((a, b) {
-                          DateTime dateA = DateTime.parse(a.createdAt);
-                          DateTime dateB = DateTime.parse(b.createdAt);
-                          return dateB.compareTo(dateA); // latest first
-                        });
-                      return _buildAuditsList(sortedAudits);
-                    } else if (snapshot.hasError) {
-                      return _buildErrorAudits(snapshot.error.toString());
-                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                      return _buildAuditsList(snapshot.data!);
-                    } else {
-                      return _buildNoAudits();
-                    }
-                  },
-                ),
+              FutureBuilder<List<dynamic>>(
+                future: _auditsFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(40),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.blue[600]!,
+                          ),
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    // Sort by date descending (latest first)
+                    final sortedAudits = snapshot.data!
+                      ..sort((a, b) {
+                        DateTime dateA = DateTime.parse(a.createdAt);
+                        DateTime dateB = DateTime.parse(b.createdAt);
+                        return dateB.compareTo(dateA); // latest first
+                      });
+                    return _buildAuditsList(sortedAudits);
+                  } else if (snapshot.hasError) {
+                    return _buildErrorAudits(snapshot.error.toString());
+                  } else {
+                    return _buildNoAudits();
+                  }
+                },
               ),
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           _showFormSelectionMenu(context);
         },
-        child: Icon(Icons.add),
+        icon: Icon(Icons.add_rounded, color: Colors.white),
+        label: Text(
+          'New Audit',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+        ),
         backgroundColor: Colors.blue[700],
+        elevation: 6,
       ),
     );
   }
 
   Widget _buildAuditsList(List<dynamic> audits) {
-    return ListView.builder(
-      itemCount: audits.length,
-      itemBuilder: (context, index) {
-        final audit = audits[index];
+    return Column(
+      children: audits.map((audit) {
         final isVerified = audit.verifiedBy.isNotEmpty;
 
         // Determine form type from serial number prefix or formType property
@@ -416,40 +609,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
         }
 
         return Card(
-          margin: EdgeInsets.only(bottom: 12),
-          elevation: 2,
-          child: ListTile(
-            leading: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                shape: BoxShape.circle,
-              ),
-              child: Icon(formIcon, color: Colors.blue[700], size: 20),
-            ),
-            title: Text(
-              audit.serialNumber,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 4),
-                Text('Auditor: ${audit.auditorName}'),
-                Text('Date: ${audit.createdAt}'),
-                Text(
-                  isVerified
-                      ? 'Verified by: ${audit.verifiedBy}'
-                      : 'Pending Verification',
-                  style: TextStyle(
-                    color: isVerified ? Colors.green : Colors.orange,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+          margin: EdgeInsets.only(bottom: 14),
+          elevation: 3,
+          shadowColor: Colors.black.withOpacity(0.1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(14),
             onTap: () async {
               print('form-type $formType');
               // Navigate to the appropriate detail screen based on form type
@@ -459,7 +626,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   context,
                   listen: false,
                 );
-               try {
+                try {
                   // Check if audit.id is null and handle it
                   if (audit.id == null) {
                     print(
@@ -488,7 +655,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     try {
                       SheetCuttingAuditForm convertedAudit;
                       if (fullAudit is Map<String, dynamic>) {
-                        convertedAudit = SheetCuttingAuditForm.fromMap(
+                        convertedAudit = SheetCuttingAuditForm.fromjson(
                           fullAudit,
                         );
                       } else {
@@ -500,7 +667,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   : null);
 
                         if (auditMap != null) {
-                          convertedAudit = SheetCuttingAuditForm.fromMap(
+                          convertedAudit = SheetCuttingAuditForm.fromjson(
                             auditMap,
                           );
                         } else {
@@ -696,9 +863,155 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 );
               }
             },
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: formType == 'sheet_cutting'
+                            ? [Colors.blue[400]!, Colors.blue[700]!]
+                            : formType == 'cell_cutting'
+                            ? [Colors.green[400]!, Colors.green[700]!]
+                            : formType == 'framing'
+                            ? [Colors.orange[400]!, Colors.orange[700]!]
+                            : [Colors.purple[400]!, Colors.purple[700]!],
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color:
+                              (formType == 'sheet_cutting'
+                                      ? Colors.blue
+                                      : formType == 'cell_cutting'
+                                      ? Colors.green
+                                      : formType == 'framing'
+                                      ? Colors.orange
+                                      : Colors.purple)
+                                  .withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Icon(formIcon, color: Colors.white, size: 24),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          audit.serialNumber,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.grey[800],
+                            letterSpacing: 0.3,
+                          ),
+                        ),
+                        SizedBox(height: 6),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person_outline,
+                              size: 14,
+                              color: Colors.grey[600],
+                            ),
+                            SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                audit.auditorName,
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.grey[600],
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 4),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.calendar_today_rounded,
+                              size: 14,
+                              color: Colors.grey[600],
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              audit.createdAt,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 6),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isVerified
+                                ? Colors.green[50]
+                                : Colors.orange[50],
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(
+                              color: isVerified
+                                  ? Colors.green[200]!
+                                  : Colors.orange[200]!,
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                isVerified
+                                    ? Icons.verified_rounded
+                                    : Icons.pending_rounded,
+                                size: 14,
+                                color: isVerified
+                                    ? Colors.green[700]
+                                    : Colors.orange[700],
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                isVerified ? 'Verified' : 'Pending',
+                                style: TextStyle(
+                                  color: isVerified
+                                      ? Colors.green[700]
+                                      : Colors.orange[700],
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 18,
+                    color: Colors.grey[400],
+                  ),
+                ],
+              ),
+            ),
           ),
         );
-      },
+      }).toList(),
     );
   }
 
@@ -767,40 +1080,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final authService = Provider.of<AuthService>(context, listen: false);
     final isAdmin = authService.currentUser?.role == 'Admin';
 
-    // For admin users, show 4 cards including pending verification
+    // For admin users, show 4 cards in 1 row
     if (isAdmin) {
-      return Column(
+      return Row(
         children: [
-          Row(
-            children: [
-              _buildStatCard(
-                'Total Audits',
-                stats['total']?.toString() ?? '0',
-                Colors.blue,
-              ),
-              SizedBox(width: 16),
-              _buildStatCard(
-                'This Month',
-                stats['thisMonth']?.toString() ?? '0',
-                Colors.green,
-              ),
-            ],
+          _buildStatCard(
+            'Total Audits',
+            stats['total']?.toString() ?? '0',
+            Colors.blue,
+            Icons.assignment_rounded,
           ),
-          SizedBox(height: 16),
-          Row(
-            children: [
-              _buildStatCard(
-                'Today',
-                stats['today']?.toString() ?? '0',
-                Colors.orange,
-              ),
-              SizedBox(width: 16),
-              _buildStatCard(
-                'Pending Verification',
-                stats['pendingVerification']?.toString() ?? '0',
-                Colors.red,
-              ),
-            ],
+          SizedBox(width: 12),
+          _buildStatCard(
+            'This Month',
+            stats['thisMonth']?.toString() ?? '0',
+            Colors.green,
+            Icons.calendar_month_rounded,
+          ),
+          SizedBox(width: 12),
+          _buildStatCard(
+            'Today',
+            stats['today']?.toString() ?? '0',
+            Colors.orange,
+            Icons.today_rounded,
+          ),
+          SizedBox(width: 12),
+          _buildStatCard(
+            'Pending',
+            stats['pendingVerification']?.toString() ?? '0',
+            Colors.red,
+            Icons.pending_actions_rounded,
           ),
         ],
       );
@@ -812,47 +1121,87 @@ class _DashboardScreenState extends State<DashboardScreen> {
             'Total Audits',
             stats['total']?.toString() ?? '0',
             Colors.blue,
+            Icons.assignment_rounded,
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 12),
           _buildStatCard(
             'This Month',
             stats['thisMonth']?.toString() ?? '0',
             Colors.green,
+            Icons.calendar_month_rounded,
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 12),
           _buildStatCard(
             'Today',
             stats['today']?.toString() ?? '0',
             Colors.orange,
+            Icons.today_rounded,
           ),
         ],
       );
     }
   }
 
-  Widget _buildStatCard(String title, String value, Color color) {
+  Widget _buildStatCard(
+    String title,
+    String value,
+    Color color,
+    IconData icon,
+  ) {
     return Expanded(
       child: Card(
         elevation: 4,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-              ),
-              SizedBox(height: 8),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: color,
+        shadowColor: color.withOpacity(0.3),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.white, color.withOpacity(0.05)],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: color.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(icon, color: color, size: 22),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                SizedBox(height: 14),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -908,94 +1257,189 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _showFormSelectionMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Select Audit Form Type',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800],
-                  ),
-                ),
-                SizedBox(height: 16),
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.blue[100],
-                    child: Icon(Icons.content_cut, color: Colors.blue[700]),
-                  ),
-                  title: Text('Sheet Cutting Inspection'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SheetCuttingFormScreen(),
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.green[100],
-                    child: Icon(Icons.grid_on, color: Colors.green[700]),
-                  ),
-                  title: Text('Cell Cutting Inspection'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CellCuttingFormScreen(),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Select Audit Form Type',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[800],
+                        letterSpacing: 0.3,
                       ),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.orange[100],
-                    child: Icon(Icons.border_outer, color: Colors.orange[700]),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Choose the type of inspection you want to perform',
+                      style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 24),
+                  _buildFormTypeCard(
+                    context,
+                    'Sheet Cutting Inspection',
+                    'Inspect sheet cutting process',
+                    Icons.content_cut_rounded,
+                    Colors.blue,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SheetCuttingFormScreen(),
+                        ),
+                      );
+                    },
                   ),
-                  title: Text('Framing Inspection'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FramingFormScreen(),
-                      ),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.purple[100],
-                    child: Icon(Icons.assignment, color: Colors.purple[700]),
+                  SizedBox(height: 12),
+                  _buildFormTypeCard(
+                    context,
+                    'Cell Cutting Inspection',
+                    'Inspect cell cutting process',
+                    Icons.grid_on_rounded,
+                    Colors.green,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CellCuttingFormScreen(),
+                        ),
+                      );
+                    },
                   ),
-                  title: Text('Standard Audit Form'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AuditFormScreen(),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                  SizedBox(height: 12),
+                  _buildFormTypeCard(
+                    context,
+                    'Framing Inspection',
+                    'Inspect framing process',
+                    Icons.crop_square_rounded,
+                    Colors.orange,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FramingFormScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 12),
+                  _buildFormTypeCard(
+                    context,
+                    'Standard Audit Form',
+                    'General audit inspection',
+                    Icons.assignment_rounded,
+                    Colors.purple,
+                    () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AuditFormScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 16),
+                ],
+              ),
             ),
           ),
+        ),
         );
       },
+    );
+  }
+
+  Widget _buildFormTypeCard(
+    BuildContext context,
+    String title,
+    String subtitle,
+    IconData icon,
+    Color color,
+    VoidCallback onTap,
+  ) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(14),
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: color.withOpacity(0.2), width: 1.5),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [color.withOpacity(0.8), color],
+                ),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: color.withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Icon(icon, color: Colors.white, size: 26),
+            ),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+            ),
+            Icon(Icons.arrow_forward_ios_rounded, size: 18, color: color),
+          ],
+        ),
+      ),
     );
   }
 

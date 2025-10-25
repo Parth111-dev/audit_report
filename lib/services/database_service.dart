@@ -608,14 +608,16 @@ class DatabaseService with ChangeNotifier {
   // Add this method to create appropriate audit form types based on serial number
   Object _createAuditFromMap(Map<String, dynamic> map) {
     final serialNumber = map['serialNumber']?.toString() ?? '';
-    
+
     // Add debugging to see what data we're getting from database
     print('🔍 Database data for ${serialNumber}: ${map.keys.toList()}');
-    print('🔍 Sample values: serialNumber=${map['serialNumber']}, auditDate=${map['auditDate']}, createdAt=${map['createdAt']}');
+    print(
+      '🔍 Sample values: serialNumber=${map['serialNumber']}, auditDate=${map['auditDate']}, createdAt=${map['createdAt']}',
+    );
 
     try {
       if (serialNumber.startsWith('SC-')) {
-        return SheetCuttingAuditForm.fromMap(map);
+        return SheetCuttingAuditForm.fromjson(map);
       } else if (serialNumber.startsWith('CC-')) {
         return CellCuttingAuditForm.fromMap(map);
       } else if (serialNumber.startsWith('FR-')) {

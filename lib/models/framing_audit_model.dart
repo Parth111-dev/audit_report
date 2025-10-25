@@ -100,7 +100,7 @@ class FramingAuditForm extends BaseAuditForm {
       final stringValue = value.toString();
       return stringValue == 'null' ? defaultValue : stringValue;
     }
-    
+
     String safeRequiredString(dynamic value, [String defaultValue = 'N/A']) {
       final result = safeString(value, defaultValue);
       return result.isEmpty ? defaultValue : result;

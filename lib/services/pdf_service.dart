@@ -153,12 +153,14 @@ class PdfService {
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
               _buildSheetCuttingHeader(audit, logo),
+              pw.SizedBox(height: 10),
+              _buildDocumentInfo(),
               pw.SizedBox(height: 20),
               _buildSheetCuttingDetails(audit),
               pw.SizedBox(height: 20),
-              _buildSheetCuttingQualityAssessment(audit),
+              _buildSheetCuttingTimeEntries(audit),
               pw.SizedBox(height: 20),
-              _buildSheetCuttingFinalAssessment(audit),
+              _buildSheetCuttingFooter(audit),
             ],
           );
         },
@@ -179,7 +181,7 @@ class PdfService {
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
             pw.Text(
-              'SHEET CUTTING AUDIT REPORT',
+              'PAHAL SOLAR - SHEET CUTTING AUDIT REPORT',
               style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
             ),
             pw.Text('Serial Number: ${audit.serialNumber}'),
@@ -210,58 +212,364 @@ class PdfService {
             _buildTableRow('Shift', audit.shift),
             _buildTableRow('PO Number', audit.po),
             _buildTableRow('Module Type', audit.moduleType),
-            _buildTableRow('Material Type', audit.materialType),
-            _buildTableRow('Sheet Thickness', audit.sheetThickness),
-            _buildTableRow('Cut Dimensions', audit.cutDimensions),
           ],
         ),
       ],
     );
   }
 
-  static pw.Widget _buildSheetCuttingQualityAssessment(
-    SheetCuttingAuditForm audit,
-  ) {
+  static pw.Widget _buildSheetCuttingTimeEntries(SheetCuttingAuditForm audit) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          'Quality Assessment',
+          'Sheet Cutting Time Entries',
           style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
         ),
         pw.SizedBox(height: 10),
+
+        // 8 AM Entries
+        if (audit.eightAMevaMake != null || audit.eightAMevaFront != null)
+          _buildTimeEntryTable('8:00 AM', [
+            ['EVA Make', audit.eightAMevaMake ?? ''],
+            ['EVA Front', audit.eightAMevaFront ?? ''],
+            ['EVA Back', audit.eightAMevaBack ?? ''],
+            ['PO No', audit.eightAMpoNo ?? ''],
+            ['As Per PO', audit.eightAMasPrPo ?? ''],
+            ['Dimension Front', audit.eightAMdimensionFront ?? ''],
+            ['Dimension Back', audit.eightAMdimensionBack ?? ''],
+            ['Visual Check', audit.eightAMvisualCheck ?? ''],
+            ['Defect', audit.eightAMdefect ?? ''],
+            ['Remark', audit.eightAMremark ?? ''],
+            ['Checked By', audit.eightAMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 10 AM Entries
+        if (audit.tenAMevaMake != null || audit.tenAMevaFront != null)
+          _buildTimeEntryTable('10:00 AM', [
+            ['EVA Make', audit.tenAMevaMake ?? ''],
+            ['EVA Front', audit.tenAMevaFront ?? ''],
+            ['EVA Back', audit.tenAMevaBack ?? ''],
+            ['PO No', audit.tenAMpoNo ?? ''],
+            ['As Per PO', audit.tenAMasPrPo ?? ''],
+            ['Dimension Front', audit.tenAMdimensionFront ?? ''],
+            ['Dimension Back', audit.tenAMdimensionBack ?? ''],
+            ['Visual Check', audit.tenAMvisualCheck ?? ''],
+            ['Defect', audit.tenAMdefect ?? ''],
+            ['Remark', audit.tenAMremark ?? ''],
+            ['Checked By', audit.tenAMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 12 PM Entries
+        if (audit.twelvePMevaMake != null || audit.twelvePMevaFront != null)
+          _buildTimeEntryTable('12:00 PM', [
+            ['EVA Make', audit.twelvePMevaMake ?? ''],
+            ['EVA Front', audit.twelvePMevaFront ?? ''],
+            ['EVA Back', audit.twelvePMevaBack ?? ''],
+            ['PO No', audit.twelvePMpoNo ?? ''],
+            ['As Per PO', audit.twelvePMasPrPo ?? ''],
+            ['Dimension Front', audit.twelvePMdimensionFront ?? ''],
+            ['Dimension Back', audit.twelvePMdimensionBack ?? ''],
+            ['Visual Check', audit.twelvePMvisualCheck ?? ''],
+            ['Defect', audit.twelvePMdefect ?? ''],
+            ['Remark', audit.twelvePMremark ?? ''],
+            ['Checked By', audit.twelvePMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 2 PM Entries
+        if (audit.twoPMevaMake != null || audit.twoPMevaFront != null)
+          _buildTimeEntryTable('2:00 PM', [
+            ['EVA Make', audit.twoPMevaMake ?? ''],
+            ['EVA Front', audit.twoPMevaFront ?? ''],
+            ['EVA Back', audit.twoPMevaBack ?? ''],
+            ['PO No', audit.twoPMpoNo ?? ''],
+            ['As Per PO', audit.twoPMasPrPo ?? ''],
+            ['Dimension Front', audit.twoPMdimensionFront ?? ''],
+            ['Dimension Back', audit.twoPMdimensionBack ?? ''],
+            ['Visual Check', audit.twoPMvisualCheck ?? ''],
+            ['Defect', audit.twoPMdefect ?? ''],
+            ['Remark', audit.twoPMremark ?? ''],
+            ['Checked By', audit.twoPMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 4 PM Entries
+        if (audit.fourPMevaMake != null || audit.fourPMevaFront != null)
+          _buildTimeEntryTable('4:00 PM', [
+            ['EVA Make', audit.fourPMevaMake ?? ''],
+            ['EVA Front', audit.fourPMevaFront ?? ''],
+            ['EVA Back', audit.fourPMevaBack ?? ''],
+            ['PO No', audit.fourPMpoNo ?? ''],
+            ['As Per PO', audit.fourPMasPrPo ?? ''],
+            ['Dimension Front', audit.fourPMdimensionFront ?? ''],
+            ['Dimension Back', audit.fourPMdimensionBack ?? ''],
+            ['Visual Check', audit.fourPMvisualCheck ?? ''],
+            ['Defect', audit.fourPMdefect ?? ''],
+            ['Remark', audit.fourPMremark ?? ''],
+            ['Checked By', audit.fourPMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 6 PM Entries
+        if (audit.sixPMevaMake != null || audit.sixPMevaFront != null)
+          _buildTimeEntryTable('6:00 PM', [
+            ['EVA Make', audit.sixPMevaMake ?? ''],
+            ['EVA Front', audit.sixPMevaFront ?? ''],
+            ['EVA Back', audit.sixPMevaBack ?? ''],
+            ['PO No', audit.sixPMpoNo ?? ''],
+            ['As Per PO', audit.sixPMasPrPo ?? ''],
+            ['Dimension Front', audit.sixPMdimensionFront ?? ''],
+            ['Dimension Back', audit.sixPMdimensionBack ?? ''],
+            ['Visual Check', audit.sixPMvisualCheck ?? ''],
+            ['Defect', audit.sixPMdefect ?? ''],
+            ['Remark', audit.sixPMremark ?? ''],
+            ['Checked By', audit.sixPMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 8 PM Entries
+        if (audit.eightPMevaMake != null || audit.eightPMevaFront != null)
+          _buildTimeEntryTable('8:00 PM', [
+            ['EVA Make', audit.eightPMevaMake ?? ''],
+            ['EVA Front', audit.eightPMevaFront ?? ''],
+            ['EVA Back', audit.eightPMevaBack ?? ''],
+            ['PO No', audit.eightPMpoNo ?? ''],
+            ['As Per PO', audit.eightPMasPrPo ?? ''],
+            ['Dimension Front', audit.eightPMdimensionFront ?? ''],
+            ['Dimension Back', audit.eightPMdimensionBack ?? ''],
+            ['Visual Check', audit.eightPMvisualCheck ?? ''],
+            ['Defect', audit.eightPMdefect ?? ''],
+            ['Remark', audit.eightPMremark ?? ''],
+            ['Checked By', audit.eightPMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 10 PM Entries
+        if (audit.tenPMevaMake != null || audit.tenPMevaFront != null)
+          _buildTimeEntryTable('10:00 PM', [
+            ['EVA Make', audit.tenPMevaMake ?? ''],
+            ['EVA Front', audit.tenPMevaFront ?? ''],
+            ['EVA Back', audit.tenPMevaBack ?? ''],
+            ['PO No', audit.tenPMpoNo ?? ''],
+            ['As Per PO', audit.tenPMasPrPo ?? ''],
+            ['Dimension Front', audit.tenPMdimensionFront ?? ''],
+            ['Dimension Back', audit.tenPMdimensionBack ?? ''],
+            ['Visual Check', audit.tenPMvisualCheck ?? ''],
+            ['Defect', audit.tenPMdefect ?? ''],
+            ['Remark', audit.tenPMremark ?? ''],
+            ['Checked By', audit.tenPMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 12 AM Entries
+        if (audit.twelveAMevaMake != null || audit.twelveAMevaFront != null)
+          _buildTimeEntryTable('12:00 AM', [
+            ['EVA Make', audit.twelveAMevaMake ?? ''],
+            ['EVA Front', audit.twelveAMevaFront ?? ''],
+            ['EVA Back', audit.twelveAMevaBack ?? ''],
+            ['PO No', audit.twelveAMpoNo ?? ''],
+            ['As Per PO', audit.twelveAMasPrPo ?? ''],
+            ['Dimension Front', audit.twelveAMdimensionFront ?? ''],
+            ['Dimension Back', audit.twelveAMdimensionBack ?? ''],
+            ['Visual Check', audit.twelveAMvisualCheck ?? ''],
+            ['Defect', audit.twelveAMdefect ?? ''],
+            ['Remark', audit.twelveAMremark ?? ''],
+            ['Checked By', audit.twelveAMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 2 AM Entries
+        if (audit.twoAMevaMake != null || audit.twoAMevaFront != null)
+          _buildTimeEntryTable('2:00 AM', [
+            ['EVA Make', audit.twoAMevaMake ?? ''],
+            ['EVA Front', audit.twoAMevaFront ?? ''],
+            ['EVA Back', audit.twoAMevaBack ?? ''],
+            ['PO No', audit.twoAMpoNo ?? ''],
+            ['As Per PO', audit.twoAMasPrPo ?? ''],
+            ['Dimension Front', audit.twoAMdimensionFront ?? ''],
+            ['Dimension Back', audit.twoAMdimensionBack ?? ''],
+            ['Visual Check', audit.twoAMvisualCheck ?? ''],
+            ['Defect', audit.twoAMdefect ?? ''],
+            ['Remark', audit.twoAMremark ?? ''],
+            ['Checked By', audit.twoAMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 4 AM Entries
+        if (audit.fourAMevaMake != null || audit.fourAMevaFront != null)
+          _buildTimeEntryTable('4:00 AM', [
+            ['EVA Make', audit.fourAMevaMake ?? ''],
+            ['EVA Front', audit.fourAMevaFront ?? ''],
+            ['EVA Back', audit.fourAMevaBack ?? ''],
+            ['PO No', audit.fourAMpoNo ?? ''],
+            ['As Per PO', audit.fourAMasPrPo ?? ''],
+            ['Dimension Front', audit.fourAMdimensionFront ?? ''],
+            ['Dimension Back', audit.fourAMdimensionBack ?? ''],
+            ['Visual Check', audit.fourAMvisualCheck ?? ''],
+            ['Defect', audit.fourAMdefect ?? ''],
+            ['Remark', audit.fourAMremark ?? ''],
+            ['Checked By', audit.fourAMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // 6 AM Entries
+        if (audit.sixAMevaMake != null || audit.sixAMevaFront != null)
+          _buildTimeEntryTable('6:00 AM', [
+            ['EVA Make', audit.sixAMevaMake ?? ''],
+            ['EVA Front', audit.sixAMevaFront ?? ''],
+            ['EVA Back', audit.sixAMevaBack ?? ''],
+            ['PO No', audit.sixAMpoNo ?? ''],
+            ['As Per PO', audit.sixAMasPrPo ?? ''],
+            ['Dimension Front', audit.sixAMdimensionFront ?? ''],
+            ['Dimension Back', audit.sixAMdimensionBack ?? ''],
+            ['Visual Check', audit.sixAMvisualCheck ?? ''],
+            ['Defect', audit.sixAMdefect ?? ''],
+            ['Remark', audit.sixAMremark ?? ''],
+            ['Checked By', audit.sixAMcheckedBy ?? ''],
+          ]),
+
+        pw.SizedBox(height: 10),
+
+        // Final Notes
+        if (audit.remarks != null || audit.note != null)
+          pw.Table(
+            border: pw.TableBorder.all(),
+            children: [
+              if (audit.remarks != null)
+                _buildTableRow('Remarkssssssss', audit.remarks ?? ''),
+              if (audit.note != null) _buildTableRow('Notes', audit.note ?? ''),
+              if (audit.qcInnspectorName != null)
+                _buildTableRow('QC Inspector', audit.qcInnspectorName ?? ''),
+              if (audit.preparedBy != null)
+                _buildTableRow('Prepared By', audit.preparedBy ?? ''),
+              if (audit.verifyBy != null)
+                _buildTableRow('Verified By', audit.verifyBy ?? ''),
+              if (audit.approvedBy != null)
+                _buildTableRow('Approved By', audit.approvedBy ?? ''),
+            ],
+          ),
+      ],
+    );
+  }
+
+  static pw.Widget _buildTimeEntryTable(
+    String timeLabel,
+    List<List<String>> data,
+  ) {
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(timeLabel, style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
         pw.Table(
           border: pw.TableBorder.all(),
-          children: [
-            _buildTableRow('Edge Quality', audit.edgeQuality),
-            _buildTableRow('Surface Finish', audit.surfaceFinish),
-            _buildTableRow('Cut Accuracy', audit.cutAccuracy),
-            _buildTableRow('Operator Name', audit.operatorName),
-            _buildTableRow('Machine ID', audit.machineId),
-            _buildTableRow('Batch Number', audit.batchNumber),
-          ],
+          children: data.map((row) {
+            return pw.TableRow(
+              children: [
+                pw.Padding(
+                  padding: pw.EdgeInsets.all(4),
+                  child: pw.Text(
+                    row[0],
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                  ),
+                ),
+                pw.Padding(
+                  padding: pw.EdgeInsets.all(4),
+                  child: pw.Text(row[1]),
+                ),
+              ],
+            );
+          }).toList(),
         ),
       ],
     );
   }
 
-  static pw.Widget _buildSheetCuttingFinalAssessment(
-    SheetCuttingAuditForm audit,
-  ) {
+  static pw.Widget _buildDocumentInfo() {
+    final now = DateTime.now();
+    final formattedDate = '${now.day}/${now.month}/${now.year}';
+
+    return pw.Container(
+      decoration: pw.BoxDecoration(
+        border: pw.Border.all(width: 1),
+        color: PdfColors.grey100,
+      ),
+      padding: pw.EdgeInsets.all(8),
+      child: pw.Row(
+        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+        children: [
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text(
+                'Doc No: IMS-FRM-PQC-002',
+                style: pw.TextStyle(
+                  fontSize: 9,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+              pw.Text(
+                'Effective Date: $formattedDate',
+                style: pw.TextStyle(fontSize: 9),
+              ),
+            ],
+          ),
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            children: [
+              pw.Text(
+                'Revision No: 01',
+                style: pw.TextStyle(
+                  fontSize: 9,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+              pw.Text('Page: 1/1', style: pw.TextStyle(fontSize: 9)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  static pw.Widget _buildSheetCuttingFooter(SheetCuttingAuditForm audit) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(
-          'Final Assessment',
+          'Additional Information',
           style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
         ),
         pw.SizedBox(height: 10),
         pw.Table(
           border: pw.TableBorder.all(),
           children: [
-            _buildTableRow('Defect Count', audit.defectCount),
-            _buildTableRow('Pass/Fail Status', audit.passFailStatus),
-            _buildTableRow('Remarks', audit.remarks),
+            if (audit.date != null) _buildTableRow('Date', audit.date ?? ''),
+            if (audit.line != null) _buildTableRow('Line', audit.line ?? ''),
+            if (audit.remarks != null)
+              _buildTableRow('Remarks', audit.remarks ?? ''),
+            if (audit.note != null) _buildTableRow('Notes', audit.note ?? ''),
+            if (audit.qcInnspectorName != null)
+              _buildTableRow('QC Inspector', audit.qcInnspectorName ?? ''),
+            if (audit.preparedBy != null)
+              _buildTableRow('Prepared By', audit.preparedBy ?? ''),
+            if (audit.verifyBy != null)
+              _buildTableRow('Verified By', audit.verifyBy ?? ''),
+            if (audit.approvedBy != null)
+              _buildTableRow('Approved By', audit.approvedBy ?? ''),
           ],
         ),
       ],

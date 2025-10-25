@@ -11,7 +11,7 @@ class AuditFormFactory {
   ) {
     switch (formType) {
       case 'sheet_cutting':
-        return SheetCuttingAuditForm.fromMap(data);
+        return SheetCuttingAuditForm.fromjson(data);
       case 'cell_cutting':
         return CellCuttingAuditForm.fromMap(data);
       case 'framing':

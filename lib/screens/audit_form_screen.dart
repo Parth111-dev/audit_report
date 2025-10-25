@@ -376,13 +376,6 @@ class _AuditFormScreenState extends State<AuditFormScreen> {
     );
   }
 
-  Widget _buildCellFlutter(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(text, style: const TextStyle(fontSize: 12)),
-    );
-  }
-
   Widget _buildHeader(double screenWidth) {
     return Container(
       width: screenWidth,
